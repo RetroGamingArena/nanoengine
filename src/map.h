@@ -1,26 +1,24 @@
 #ifndef _map_h_
 #define _map_h_
 
-#include "MapEntry.h"
-
-#define EMPTY_ENTRY(entry) ((entry)->e.w == 0)//enabled == 1)
+#define EMPTY_ENTRY(entry) ((entry) == 0)//enabled == 1)
 
 #define MAP_FOR_EACH_2(map, ex, ey, ez, esx, esy, esz, ew) \
     for (unsigned int i = 0; i < map->mask; i++) { \
-        MapEntry *entry = map->data + i; \
+        char *entry = map->data + i; \
         if (EMPTY_ENTRY(entry)) { \
             continue; \
         } \
-        int ew = entry->e.w;
+        int ew = *entry;//->e.w;
 
 
 #define MAP_FOR_EACH(map, ex, ey, ez, ew) \
     for (unsigned int i = 0; i < map->mask; i++) { \
-        MapEntry *entry = map->data + i; \
+        char *entry = map->data + i; \
         if (EMPTY_ENTRY(entry)) { \
             continue; \
         } \
-        int ew = entry->e.w;
+        int ew = *entry;//->e.w;
 
 #define END_MAP_FOR_EACH }
 
@@ -32,7 +30,7 @@ class Map
         int dz;
         unsigned int mask;
         unsigned int size;
-        MapEntry *data;
+        char *data;
         static int getIndex(int x, int y, int z)
         {
             return (x/*+1*/)+(z/*+1*/)*34+y*34*34;

@@ -19,6 +19,6 @@ typedef union
         //bool computed = true;
         char w = 0;
     } e;
-} MapEntry;
+} MapEntry2;
 
 #endif /* defined(__Nanocraft__MapEntry__) */

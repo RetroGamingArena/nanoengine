@@ -29,7 +29,7 @@ Map::Map(int dx, int dy, int dz, int mask)
     this->dz = dz;
     this->mask = mask;
     this->size = 0;
-    this->data = (MapEntry *)calloc(this->mask + 1, sizeof(MapEntry));
+    this->data = (char *)calloc(this->mask + 1, sizeof(char));
 }
 
 /*void Map::map_alloc(Map *map, int dx, int dy, int dz, int mask)
@@ -52,8 +52,8 @@ void Map::map_copy(Map *dst, Map *src) {
     dst->dz = src->dz;
     dst->mask = src->mask;
     dst->size = src->size;
-    dst->data = (MapEntry *)calloc(dst->mask + 1, sizeof(MapEntry));
-    memcpy(dst->data, src->data, (dst->mask + 1) * sizeof(MapEntry));
+    dst->data = (char *)calloc(dst->mask + 1, sizeof(char));
+    memcpy(dst->data, src->data, (dst->mask + 1) * sizeof(char));
 }
 
 int Map::_hitTest(float max_distance, int previous, float x, float y, float z, float vx, float vy, float vz, int *hx, int *hy, int *hz)
@@ -92,7 +92,7 @@ int Map::set(int x, int y, int z, double dx, double dy, double dz, int w, bool e
     
     unsigned int index = getIndex(x,y%32,z);
     
-    MapEntry *entry = this->data + index;
+    char *entry = this->data + index;
    
     if(x==0  && index==1)
         int a = 2;
@@ -100,7 +100,7 @@ int Map::set(int x, int y, int z, double dx, double dy, double dz, int w, bool e
     if (w)
     {
 
-       entry->e.w = w;
+       *entry/*->e.w*/ = w;
         this->size++;
         return 1;
     }
@@ -119,7 +119,7 @@ int Map::map_get(Map *map, int x, int y, int z) {
     
     index = getIndex(x,y%32,z);
     
-    MapEntry *entry = map->data + index;
+    char *entry = map->data + index;
     /*while (!EMPTY_ENTRY(entry))
     {
         if (entry->e.x == x && entry->e.y == y && entry->e.z == z)
@@ -130,7 +130,7 @@ int Map::map_get(Map *map, int x, int y, int z) {
         entry = map->data + index;
     }
     return 0;*/
-    return entry->e.w;
+    return *entry/*->e.w*/;
 }
 
 void Map::map_grow(Map *map) {

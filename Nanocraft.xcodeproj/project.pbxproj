@@ -43,7 +43,6 @@
 		64A7B4D91A366F1E006E7A5B /* WorkerItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64A7B4A71A366F1E006E7A5B /* WorkerItem.cpp */; };
 		64A7B4DA1A366F1E006E7A5B /* Block.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64A7B4AA1A366F1E006E7A5B /* Block.cpp */; };
 		64A7B4DB1A366F1E006E7A5B /* Chunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64A7B4AC1A366F1E006E7A5B /* Chunk.cpp */; };
-		64A7B4DC1A366F1E006E7A5B /* MapEntry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64A7B4AE1A366F1E006E7A5B /* MapEntry.cpp */; };
 		64A7B4DD1A366F1E006E7A5B /* World.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64A7B4B01A366F1E006E7A5B /* World.cpp */; };
 		64A7B4DE1A366F39006E7A5B /* font.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 64A7B4B31A366F1E006E7A5B /* font.png */; };
 		64A7B4DF1A366F39006E7A5B /* sign.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 64A7B4B41A366F1E006E7A5B /* sign.png */; };
@@ -179,8 +178,6 @@
 		64A7B4AB1A366F1E006E7A5B /* Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block.h; sourceTree = "<group>"; };
 		64A7B4AC1A366F1E006E7A5B /* Chunk.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Chunk.cpp; sourceTree = "<group>"; };
 		64A7B4AD1A366F1E006E7A5B /* Chunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chunk.h; sourceTree = "<group>"; };
-		64A7B4AE1A366F1E006E7A5B /* MapEntry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MapEntry.cpp; sourceTree = "<group>"; };
-		64A7B4AF1A366F1E006E7A5B /* MapEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapEntry.h; sourceTree = "<group>"; };
 		64A7B4B01A366F1E006E7A5B /* World.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = World.cpp; sourceTree = "<group>"; };
 		64A7B4B11A366F1E006E7A5B /* World.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = World.h; sourceTree = "<group>"; };
 		64A7B4B31A366F1E006E7A5B /* font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = font.png; sourceTree = "<group>"; };
@@ -417,8 +414,6 @@
 				64A7B4AB1A366F1E006E7A5B /* Block.h */,
 				64A7B4AC1A366F1E006E7A5B /* Chunk.cpp */,
 				64A7B4AD1A366F1E006E7A5B /* Chunk.h */,
-				64A7B4AE1A366F1E006E7A5B /* MapEntry.cpp */,
-				64A7B4AF1A366F1E006E7A5B /* MapEntry.h */,
 				64A7B4B01A366F1E006E7A5B /* World.cpp */,
 				64A7B4B11A366F1E006E7A5B /* World.h */,
 			);
@@ -530,7 +525,6 @@
 				64A7B4CF1A366F1E006E7A5B /* util.cpp in Sources */,
 				64A7B4CD1A366F1E006E7A5B /* MathUtils.cpp in Sources */,
 				64A7B4D41A366F1E006E7A5B /* SubView.cpp in Sources */,
-				64A7B4DC1A366F1E006E7A5B /* MapEntry.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
