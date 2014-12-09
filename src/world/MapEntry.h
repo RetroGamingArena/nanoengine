@@ -13,12 +13,11 @@
 
 typedef union
 {
-    short value;
+    char value;
     struct
     {
-        bool enabled = true;
-        bool computed = true;
-        char w;
+        //bool computed = true;
+        char w = 0;
     } e;
 } MapEntry;
 

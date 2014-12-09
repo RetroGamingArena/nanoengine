@@ -3,7 +3,7 @@
 
 #include "MapEntry.h"
 
-#define EMPTY_ENTRY(entry) ((entry)->e.enabled == 1)
+#define EMPTY_ENTRY(entry) ((entry)->e.w == 0)//enabled == 1)
 
 #define MAP_FOR_EACH_2(map, ex, ey, ez, esx, esy, esz, ew) \
     for (unsigned int i = 0; i < map->mask; i++) { \

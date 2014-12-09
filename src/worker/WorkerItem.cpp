@@ -65,7 +65,7 @@ void WorkerItem::computeChunk(World *world)
                 int y = 0;
                 int z = 0;
                 
-                if(entry->e.computed)
+                //if(entry->e.computed)
                 {
                     x = x2;
                     y = y2;
@@ -111,7 +111,7 @@ void WorkerItem::computeChunk(World *world)
                     int y = 0;
                     int z = 0;
                     
-                    if(entry->e.computed)
+                    //if(entry->e.computed)
                     {
                         x = x2;
                         y = y2;
@@ -151,7 +151,7 @@ void WorkerItem::computeChunk(World *world)
         int y = 0;
         int z = 0;
         
-        if(entry->e.computed)
+        //if(entry->e.computed)
         {
             x = x2;
             y = y2;
@@ -202,7 +202,7 @@ void WorkerItem::computeChunk(World *world)
         int y = 0;
         int z = 0;
         
-        if(entry->e.computed)
+        //if(entry->e.computed)
         {
             x = x2;
             y = y2;

@@ -86,8 +86,6 @@ int Map::_hitTest(float max_distance, int previous, float x, float y, float z, f
 
 int Map::set(int x, int y, int z, double dx, double dy, double dz, int w, bool enabled)
 {
-    //unsigned int index = hash(x, y, z) & this->mask;
-    
     x -= this->dx;
     y -= this->dy;
     z -= this->dz;
@@ -96,42 +94,14 @@ int Map::set(int x, int y, int z, double dx, double dy, double dz, int w, bool e
     
     MapEntry *entry = this->data + index;
    
-    /*while (!EMPTY_ENTRY(entry)) {
-        if (entry->e.x == x && entry->e.y == y && entry->e.z == z)
-            break;
-        index = (index + 1) & this->mask;
-        entry = this->data + index;
-    }*/
-
     if(x==0  && index==1)
         int a = 2;
     
-    /*entry->e.x = x;
-    entry->e.y = y%32;
-    entry->e.z = z;*/
-    
-    entry->e.computed = true;
-
     if (w)
     {
 
-        /*while (dx<0)
-            dx++;
-        while (dy<0)
-            dy++;
-        while (dz<0)
-            dz++;*/
-        
-        /*entry->e.sx = dx/CHUNK_RES;
-        entry->e.sy = dy/CHUNK_RES;
-        entry->e.sz = dz/CHUNK_RES;*/
-        
-        entry->e.w = w;
+       entry->e.w = w;
         this->size++;
-        if (this->size * 2 > this->mask)
-        {
-            //map_grow(this);
-        }
         return 1;
     }
     return 0;
