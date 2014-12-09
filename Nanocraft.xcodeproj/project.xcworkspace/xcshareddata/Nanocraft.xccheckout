@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>A3D2144C-81C3-4353-92B1-E8CA688673FD</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Nanocraft</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>764FBEBE1EC3128FF92A6643FB01284737E7AB70</key>
+		<string>https://github.com/RetroGamingArena/nanoengine.git</string>
+		<key>96897B67B0814AFC1729862696C1F18F5335BB62</key>
+		<string>https://github.com/RetroGamingArena/Nanocraft.git</string>
+		<key>EE5F309924C2159F2B63CD5935421EBF45D14510</key>
+		<string>https://github.com/RetroGamingArena/nanotest.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Nanocraft.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>764FBEBE1EC3128FF92A6643FB01284737E7AB70</key>
+		<string>../..</string>
+		<key>96897B67B0814AFC1729862696C1F18F5335BB62</key>
+		<string>../../../Nanocraft</string>
+		<key>EE5F309924C2159F2B63CD5935421EBF45D14510</key>
+		<string>../../../nanotest</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/RetroGamingArena/nanoengine.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>764FBEBE1EC3128FF92A6643FB01284737E7AB70</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>96897B67B0814AFC1729862696C1F18F5335BB62</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Nanocraft</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>764FBEBE1EC3128FF92A6643FB01284737E7AB70</string>
+			<key>IDESourceControlWCCName</key>
+			<string>nanoengine</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>EE5F309924C2159F2B63CD5935421EBF45D14510</string>
+			<key>IDESourceControlWCCName</key>
+			<string>nanotest</string>
+		</dict>
+	</array>
+</dict>
+</plist>
