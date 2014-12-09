@@ -1263,16 +1263,7 @@ void Model::parseBuffer(char *buffer)
                 strncpy(player->name, name, MAX_NAME_LENGTH);
             }
         }
-        /*snprintf(
-                 format, sizeof(format),
-                 "S,%%d,%%d,%%d,%%d,%%d,%%d,%%%d[^\n]", MAX_SIGN_LENGTH - 1);*/
-        int face;
-        //char text[MAX_SIGN_LENGTH] = {0};
-        /*if (sscanf(line, format,
-                   &bp, &bq, &bx, &by, &bz, &face, text) >= 6)
-        {
-            _setSign(bp, bq, bx, by, bz, face, text, 0);
-        }*/
+
         line = tokenize(NULL, "\n", &key);
     }
 }
@@ -1389,7 +1380,7 @@ void Model::handleMovement(double dt)
         s->dx = vx;
         s->dz = vz;
         
-        if(collide(1, s))
+        //if(collide(1, s))
         {
             s->dy = 0;
         }

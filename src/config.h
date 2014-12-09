@@ -1,6 +1,8 @@
 #ifndef _config_h_
 #define _config_h_
 
+#include <math.h>
+
 // app parameters
 //#define DEBUG 0
 #define FULLSCREEN 0
@@ -51,5 +53,6 @@
 #define CHUNK_RES 1
 #define CHUNK_SIZE 32
 #define COMMIT_INTERVAL 5
+#define ITEM_RANGE 8
 
 #endif

@@ -5,7 +5,7 @@
 #include "util.h"
 #include "noise.h"
 
-int hash_int(int key) {
+/*int hash_int(int key) {
     key = ~key + (key << 15);
     key = key ^ (key >> 12);
     key = key + (key << 2);
@@ -20,7 +20,7 @@ int hash(int x, int y, int z) {
     y = hash_int(y);
     z = hash_int(z);
     return x ^ y ^ z;
-}
+}*/
 
 Map::Map(int dx, int dy, int dz, int mask)
 {
@@ -29,18 +29,8 @@ Map::Map(int dx, int dy, int dz, int mask)
     this->dz = dz;
     this->mask = mask;
     this->size = 0;
-    this->data = (char *)calloc(this->mask + 1, sizeof(char));
+    this->data = (nano_row *)calloc((this->mask + 1) / (8/ITEM_RANGE), sizeof(nano_row));
 }
-
-/*void Map::map_alloc(Map *map, int dx, int dy, int dz, int mask)
-{
-    map->dx = dx;
-    map->dy = dy;
-    map->dz = dz;
-    map->mask = mask;
-    map->size = 0;
-    map->data = (MapEntry *)calloc(map->mask + 1, sizeof(MapEntry));
-}*/
 
 void Map::map_free(Map *map) {
     free(map->data);
@@ -52,8 +42,8 @@ void Map::map_copy(Map *dst, Map *src) {
     dst->dz = src->dz;
     dst->mask = src->mask;
     dst->size = src->size;
-    dst->data = (char *)calloc(dst->mask + 1, sizeof(char));
-    memcpy(dst->data, src->data, (dst->mask + 1) * sizeof(char));
+    dst->data = (nano_row *)calloc(dst->mask + 1 / (8/ITEM_RANGE), sizeof(nano_row));
+    memcpy(dst->data, src->data, (dst->mask + 1) / (8/ITEM_RANGE) * sizeof(nano_row));
 }
 
 int Map::_hitTest(float max_distance, int previous, float x, float y, float z, float vx, float vy, float vz, int *hx, int *hy, int *hz)
@@ -92,15 +82,10 @@ int Map::set(int x, int y, int z, double dx, double dy, double dz, int w, bool e
     
     unsigned int index = getIndex(x,y%32,z);
     
-    char *entry = this->data + index;
-   
-    if(x==0  && index==1)
-        int a = 2;
-    
-    if (w)
+    if (w > 0)
     {
 
-       *entry/*->e.w*/ = w;
+        setData(index,w);
         this->size++;
         return 1;
     }
@@ -108,7 +93,7 @@ int Map::set(int x, int y, int z, double dx, double dy, double dz, int w, bool e
 }
 
 int Map::map_get(Map *map, int x, int y, int z) {
-    unsigned int index = hash(x, y, z) & map->mask;
+    //unsigned int index = hash(x, y, z) & map->mask;
     x -= map->dx;//-1;
     y -= map->dy;
     z -= map->dz;//-1;
@@ -117,9 +102,9 @@ int Map::map_get(Map *map, int x, int y, int z) {
     if (y < 0 || y > 255) return 0;
     if (z < 0 || z > 255) return 0;
     
-    index = getIndex(x,y%32,z);
+    unsigned int index = getIndex(x,y%32,z);
     
-    char *entry = map->data + index;
+    unsigned char entry = map->getData(index);
     /*while (!EMPTY_ENTRY(entry))
     {
         if (entry->e.x == x && entry->e.y == y && entry->e.z == z)
@@ -130,7 +115,7 @@ int Map::map_get(Map *map, int x, int y, int z) {
         entry = map->data + index;
     }
     return 0;*/
-    return *entry/*->e.w*/;
+    return entry/*->e.w*/;
 }
 
 void Map::map_grow(Map *map) {
@@ -175,10 +160,7 @@ void Map::createWorld(int p, int q)
                 h = t;
                 w = 2;
             }
-            
-            if(q==0)
-                int a = 2;
-            
+  
             // sand and grass terrain
             for (float y = 0; y < h; y=y+CHUNK_RES)
             {

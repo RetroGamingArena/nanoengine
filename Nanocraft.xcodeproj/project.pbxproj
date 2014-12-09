@@ -96,6 +96,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		64353B421A37506F00F86891 /* nanotypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = nanotypes.h; sourceTree = "<group>"; };
 		648F5C4F19EBA97300B23A21 /* Nanocraft */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Nanocraft; sourceTree = BUILT_PRODUCTS_DIR; };
 		64A7B44F1A366F1E006E7A5B /* lodepng.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lodepng.cpp; sourceTree = "<group>"; };
 		64A7B4501A366F1E006E7A5B /* lodepng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lodepng.h; sourceTree = "<group>"; };
@@ -299,6 +300,7 @@
 				64A7B4741A366F1E006E7A5B /* map.h */,
 				64A7B4751A366F1E006E7A5B /* matrix.cpp */,
 				64A7B4761A366F1E006E7A5B /* matrix.h */,
+				64353B421A37506F00F86891 /* nanotypes.h */,
 				64A7B4771A366F1E006E7A5B /* model */,
 				64A7B47E1A366F1E006E7A5B /* opengl */,
 				64A7B4811A366F1E006E7A5B /* ring.c */,
