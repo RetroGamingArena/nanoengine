@@ -48,11 +48,9 @@
 // advanced parameters
 #define CREATE_CHUNK_RADIUS 10
 #define RENDER_CHUNK_RADIUS 10
-#define RENDER_SIGN_RADIUS 4
 #define DELETE_CHUNK_RADIUS 14
 #define CHUNK_RES 1
 #define CHUNK_SIZE 32
 #define COMMIT_INTERVAL 5
-#define ITEM_RANGE 8
 
 #endif

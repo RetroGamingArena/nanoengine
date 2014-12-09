@@ -52,9 +52,9 @@ class Map
             int rowIndex = i / itemsPerRow;
             int colIndex = i % itemsPerRow;
             
-            unsigned long int current = *(this->data+rowIndex);
+            nano_row current = *(this->data+rowIndex);
             
-            //current = (current << (colIndex*itemSize)) >> ((colIndex+1)*itemSize);
+            current = (current << (colIndex*itemSize)) >> ((colIndex+itemsPerRow-colIndex-1)*itemSize);
             
             return current;
         }

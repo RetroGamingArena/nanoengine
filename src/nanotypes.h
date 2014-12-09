@@ -11,5 +11,6 @@
 
 typedef unsigned char nano_row;
 typedef unsigned char nano;
+#define ITEM_RANGE 8
 
 #endif

@@ -49,7 +49,7 @@ public:
     int create_radius;
     int render_radius;
     int delete_radius;
-    int sign_radius;
+    //int sign_radius;
     Player players[MAX_PLAYERS];
     int player_count;
     int typing;

@@ -14,6 +14,7 @@
 
 #include "AbstractWindow.h"
 #include "Attrib.h"
+#include "TextureUtils.h"
 #include "model.h"
 #include "FPS.h"
 #include "Timer.h"
@@ -24,6 +25,8 @@ using namespace std;
 
 class Engine
 {
+    Model *g = getModel();
+    
     vector<View*> views;
     vector<Worker*> workers;
     AbstractWindow* abstractWindow;
@@ -59,6 +62,7 @@ class Engine
     void resize();
     void render(Player* player);
     void stop();
+    int run();
 };
 
 #endif /* defined(__Nanocraft__Engine__) */

@@ -64,6 +64,7 @@ Engine::Engine()
     timer = new Timer();
     abstractWindow = new GLFWWindow();
     model = new Model();
+    g = getModel();
 }
 
 Engine* Engine::getInstance()
@@ -203,4 +204,85 @@ void Engine::stop()
     
     glfwTerminate();
     curl_global_cleanup();
+}
+
+int Engine::run()
+{
+    if(!init())
+        return -1;
+    
+    if(!create())
+        return -1;
+    
+    start();
+    
+    // LOAD TEXTURES
+    TextureUtils::loadTexture("textures/texture.png", GL_TEXTURE0, GL_NEAREST, false);
+    
+    TextureUtils::loadTexture("textures/font.png", GL_TEXTURE1, GL_LINEAR, false);
+    
+    TextureUtils::loadTexture("textures/sky.png", GL_TEXTURE2, GL_LINEAR, true);
+    
+    TextureUtils::loadTexture("textures/sign.png", GL_TEXTURE3, GL_NEAREST, false);
+    
+    initViews();
+    
+    // LOAD SHADERS //
+    loadShader();
+    
+    // LOCAL VARIABLES //
+    g->reset();
+    
+    Player *me = g->players;
+    g->initWorld(me);
+    
+    Player *player = g->players + g->observe1;
+    player->state.y = -1;
+    
+    // BEGIN MAIN LOOP //
+    //GLuint sky_buffer = gen_sky_buffer();
+    while (!glfwWindowShouldClose(g->window))
+    {
+        // WINDOW SIZE AND SCALE //
+        resize();
+        
+        //TIMER
+        updateFPS();
+        getTimer()->refresh();
+        
+        // HANDLE MOUSE INPUT //
+        g->handleMouseInput();
+        
+        // HANDLE MOVEMENT //
+        g->handleMovement(getTimer()->getDt());
+        
+        // PREPARE TO RENDER //
+        g->deleteChunks();
+        del_buffer(me->buffer);
+        
+        Player *player = g->players + g->observe1;
+        render(player);
+        
+        //render_sky(&engine->sky_attrib, player, sky_buffer);
+        getViews()[0]->render(g, me);
+        glClear(GL_DEPTH_BUFFER_BIT);
+        
+        getViews()[2]->render(g, me);
+        
+        // RENDER HUD //
+        getViews()[1]->render(g, me);
+        
+        getViews()[3]->render(g, me);
+        
+        // SWAP AND POLL //
+        glfwSwapBuffers(g->window);
+        glfwPollEvents();
+        if (g->mode_changed)
+        {
+            g->mode_changed = 0;
+            break;
+        }
+    }
+    stop();
+    return 0;
 }

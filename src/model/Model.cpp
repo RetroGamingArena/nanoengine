@@ -26,7 +26,6 @@ Model::Model()
     create_radius = CREATE_CHUNK_RADIUS;
     render_radius = RENDER_CHUNK_RADIUS;
     delete_radius = DELETE_CHUNK_RADIUS;
-    sign_radius = RENDER_SIGN_RADIUS;
     
     reset();
 }
