@@ -12,14 +12,14 @@
 #include "glew.h"
 
 #include "map.h"
-#include "sign.h"
+//#include "sign.h"
 
 class Chunk
 {
     public:
     Map map;
     Map lights;
-    SignList signs;
+    //SignList signs;
     int p;
     int q;
     int faces;
@@ -30,10 +30,10 @@ class Chunk
     GLuint buffer;
     GLuint sign_buffer;
     
-    Chunk(int p, int q){this->p = p; this->q = q; signs.size = 0;};
+    Chunk(int p, int q){this->p = p; this->q = q;};
     int distance(int p, int q);
     static int chunked(float x);
-    void genSignBuffer();
+    //void genSignBuffer();
 };
 
 #endif /* defined(__Nanocraft__Chunk__) */

@@ -93,8 +93,8 @@ public:
     void handleMouseInput();
     void handleMovement(double dt);
     void setBlock(int x, int y, int z, int w);
-    void unsetSign(int x, int y, int z);
-    void unsetSignFace(int x, int y, int z, int face);
+    //void unsetSign(int x, int y, int z);
+    //void unsetSignFace(int x, int y, int z, int face);
     void _setSign(int p, int q, int x, int y, int z, int face, const char *text, int dirty);
     void parseCommand(const char *buffer, int forward);
     void checkWorkers();
@@ -108,7 +108,7 @@ public:
     int hitTestFace(Player *player, int *x, int *y, int *z, int *face);
     int hitTest(int previous, float x, float y, float z, float rx, float ry, int *bx, int *by, int *bz);
     static int chunked(float x);
-    void setSign(int x, int y, int z, int face, const char *text);
+    //void setSign(int x, int y, int z, int face, const char *text);
     //Chunk *findChunk(int p, int q);
     void addMessage(const char *text);
     void onMouseButton(GLFWwindow *window, int button, int action, int mods);

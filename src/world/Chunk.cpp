@@ -36,7 +36,7 @@ int Chunk::chunked(float x)
         return (base + 1)*-1;
 }
 
-void Chunk::genSignBuffer()
+/*void Chunk::genSignBuffer()
 {
     // first pass - count characters
     int max_faces = 0;
@@ -56,4 +56,4 @@ void Chunk::genSignBuffer()
     del_buffer(sign_buffer);
     sign_buffer = gen_faces(5, faces, data);
     sign_faces = faces;
-}
+}*/

@@ -27,7 +27,6 @@
 		64A7B4C81A366F1E006E7A5B /* ring.c in Sources */ = {isa = PBXBuildFile; fileRef = 64A7B4811A366F1E006E7A5B /* ring.c */; };
 		64A7B4C91A366F1E006E7A5B /* AbstractWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64A7B4841A366F1E006E7A5B /* AbstractWindow.cpp */; };
 		64A7B4CA1A366F1E006E7A5B /* GLFWWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64A7B4861A366F1E006E7A5B /* GLFWWindow.cpp */; };
-		64A7B4CB1A366F1E006E7A5B /* sign.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64A7B4881A366F1E006E7A5B /* sign.cpp */; };
 		64A7B4CC1A366F1E006E7A5B /* BufferUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64A7B48B1A366F1E006E7A5B /* BufferUtils.cpp */; };
 		64A7B4CD1A366F1E006E7A5B /* MathUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64A7B48D1A366F1E006E7A5B /* MathUtils.cpp */; };
 		64A7B4CE1A366F1E006E7A5B /* TextureUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64A7B48F1A366F1E006E7A5B /* TextureUtils.cpp */; };
@@ -148,8 +147,6 @@
 		64A7B4851A366F1E006E7A5B /* AbstractWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractWindow.h; sourceTree = "<group>"; };
 		64A7B4861A366F1E006E7A5B /* GLFWWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLFWWindow.cpp; sourceTree = "<group>"; };
 		64A7B4871A366F1E006E7A5B /* GLFWWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLFWWindow.h; sourceTree = "<group>"; };
-		64A7B4881A366F1E006E7A5B /* sign.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sign.cpp; sourceTree = "<group>"; };
-		64A7B4891A366F1E006E7A5B /* sign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sign.h; sourceTree = "<group>"; };
 		64A7B48B1A366F1E006E7A5B /* BufferUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BufferUtils.cpp; sourceTree = "<group>"; };
 		64A7B48C1A366F1E006E7A5B /* BufferUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BufferUtils.h; sourceTree = "<group>"; };
 		64A7B48D1A366F1E006E7A5B /* MathUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MathUtils.cpp; sourceTree = "<group>"; };
@@ -310,8 +307,6 @@
 				64A7B4811A366F1E006E7A5B /* ring.c */,
 				64A7B4821A366F1E006E7A5B /* ring.h */,
 				64A7B4831A366F1E006E7A5B /* screen */,
-				64A7B4881A366F1E006E7A5B /* sign.cpp */,
-				64A7B4891A366F1E006E7A5B /* sign.h */,
 				64A7B48A1A366F1E006E7A5B /* tools */,
 				64A7B4911A366F1E006E7A5B /* util.cpp */,
 				64A7B4921A366F1E006E7A5B /* util.h */,
@@ -505,7 +500,6 @@
 				64A7B4D11A366F1E006E7A5B /* CubeView.cpp in Sources */,
 				64A7B4BC1A366F1E006E7A5B /* cube.cpp in Sources */,
 				64A7B4C11A366F1E006E7A5B /* main.cpp in Sources */,
-				64A7B4CB1A366F1E006E7A5B /* sign.cpp in Sources */,
 				64A7B4B71A366F1E006E7A5B /* lodepng.cpp in Sources */,
 				64A7B4DA1A366F1E006E7A5B /* Block.cpp in Sources */,
 				64A7B4C21A366F1E006E7A5B /* map.cpp in Sources */,

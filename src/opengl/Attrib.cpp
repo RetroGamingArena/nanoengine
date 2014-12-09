@@ -153,7 +153,7 @@ void Attrib::drawText(GLuint buffer, int length)
     glDisable(GL_BLEND);
 }
 
-void Attrib::drawSigns(Chunk *chunk)
+/*void Attrib::drawSigns(Chunk *chunk)
 {
     glEnable(GL_POLYGON_OFFSET_FILL);
     glPolygonOffset(-8, -1024);
@@ -167,7 +167,7 @@ void Attrib::drawSign(GLuint buffer, int length)
     glPolygonOffset(-8, -1024);
     drawTriangles3dText(buffer, length * 6);
     glDisable(GL_POLYGON_OFFSET_FILL);
-}
+}*/
 
 void Attrib::drawPlayer(Player *player)
 {
@@ -235,7 +235,7 @@ void Attrib::renderPlayers(Model *model, Player *player)
  }
  }
 
-void Attrib::renderSign(Model *model, Player *player) {
+/*void Attrib::renderSign(Model *model, Player *player) {
  if (!model->typing || model->typing_buffer[0] != CRAFT_KEY_SIGN) {
  return;
  }
@@ -260,7 +260,7 @@ void Attrib::renderSign(Model *model, Player *player) {
  GLuint buffer = gen_faces(5, length, data);
  drawSign(buffer, length);
  del_buffer(buffer);
- }
+ }*/
  
 void Attrib::renderText(Model *model, int justify, float x, float y, float n, char *text)
  {
@@ -277,7 +277,7 @@ void Attrib::renderText(Model *model, int justify, float x, float y, float n, ch
  del_buffer(buffer);
  }
 
-void Attrib::renderSigns(Model *model, Player *player)
+/*void Attrib::renderSigns(Model *model, Player *player)
 {
     State *s = &player->state;
     int p = Chunk::chunked(s->x);
@@ -301,4 +301,4 @@ void Attrib::renderSigns(Model *model, Player *player)
         }
         drawSigns(chunk);
     }
-}
+}*/

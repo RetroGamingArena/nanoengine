@@ -313,5 +313,5 @@ void WorkerItem::generateChunk(Chunk *chunk)
     
     del_buffer(chunk->buffer);
     chunk->buffer = gen_faces(10, faces, data);
-    chunk->genSignBuffer();
+    //chunk->genSignBuffer();
 }

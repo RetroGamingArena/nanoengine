@@ -113,8 +113,7 @@ void GLFWWindow::on_key(GLFWwindow *window, int key, int scancode, int action, i
                     int x, y, z, face;
                     if (g->hitTestFace(player, &x, &y, &z, &face))
                     {
-                        g->setSign(
-                        /*set_sign(*/x, y, z, face, g->typing_buffer + 1);
+                        /*g->setSign(x, y, z, face, g->typing_buffer + 1);*/
                     }
                 }
                 else if (g->typing_buffer[0] == '/') {

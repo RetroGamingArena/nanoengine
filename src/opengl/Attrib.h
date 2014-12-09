@@ -44,14 +44,14 @@ public:
     void drawTriangles3dText(GLuint buffer, int count);
     void drawTriangles3d(GLuint buffer, int count);
     void drawTriangles2d(GLuint buffer, int count);
-    void drawSign(GLuint buffer, int length);
-    void drawSigns(Chunk *chunk);
+    //void drawSign(GLuint buffer, int length);
+    //void drawSigns(Chunk *chunk);
     void drawText(GLuint buffer, int length);
     void drawChunk(Chunk *chunk);
     void drawPlayer(Player *player);
     void renderPlayers(Model *model, Player *player);
-    void renderSign(Model *model, Player *player);
-    void renderSigns(Model *model, Player *player);
+    //void renderSign(Model *model, Player *player);
+    //void renderSigns(Model *model, Player *player);
     void renderText(Model *model, int justify, float x, float y, float n, char *text);
 };
 

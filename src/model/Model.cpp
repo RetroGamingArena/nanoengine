@@ -245,7 +245,7 @@ int Model::chunked(float x)
     return floorf(roundf(x) / CHUNK_SIZE);
 }
 
-void Model::setSign(int x, int y, int z, int face, const char *text)
+/*void Model::setSign(int x, int y, int z, int face, const char *text)
 {
     int p = chunked(x);
     int q = chunked(z);
@@ -268,19 +268,7 @@ void Model::_setSign(int p, int q, int x, int y, int z, int face, const char *te
             chunk->dirty = 1;
         }
     }
-    //db_insert_sign(p, q, x, y, z, face, text);
 }
-
-/*Chunk *Model::findChunk(int p, int q)
-{
-    for (int i = 0; i < chunks->size(); i++) {
-        Chunk *chunk = (*chunks)[i];
-        if (chunk->p == p && chunk->q == q) {
-            return chunk;
-        }
-    }
-    return 0;
-}*/
 
 void Model::unsetSignFace(int x, int y, int z, int face)
 {
@@ -297,7 +285,7 @@ void Model::unsetSignFace(int x, int y, int z, int face)
     else {
         //db_delete_sign(x, y, z, face);
     }
-}
+}*/
 
 void Model::parseCommand(const char *buffer, int forward)
 {
@@ -461,7 +449,7 @@ void Model::_setBlock(int p, int q, int x, int y, int z, int w, int dirty)
         //db_insert_block(p, q, x, y, z, w);
     }
     if (w == 0 && chunked(x) == p && chunked(z) == q) {
-        unsetSign(x, y, z);
+        //unsetSign(x, y, z);
         setLight(p, q, x, y, z, 0);
     }
 }
@@ -713,7 +701,7 @@ void Model::cylinder(Block *b1, Block *b2, int radius, int fill)
     }
 }*/
 
-void Model::unsetSign(int x, int y, int z)
+/*void Model::unsetSign(int x, int y, int z)
 {
     int p = chunked(x);
     int q = chunked(z);
@@ -722,13 +710,12 @@ void Model::unsetSign(int x, int y, int z)
         SignList *signs = &chunk->signs;
         if (sign_list_remove_all(signs, x, y, z)) {
             chunk->dirty = 1;
-            //db_delete_signs(x, y, z);
         }
     }
     else {
-        //db_delete_signs(x, y, z);
+       
     }
-}
+}*/
 
 void Model::setLight(int p, int q, int x, int y, int z, int w)
 {
@@ -941,7 +928,7 @@ void Model::deleteChunks()
         if (_delete) {
             Map::map_free(&chunk->map);
             Map::map_free(&chunk->lights);
-            sign_list_free(&chunk->signs);
+            //sign_list_free(&chunk->signs);
             del_buffer(chunk->buffer);
             del_buffer(chunk->sign_buffer);
             Chunk *other = (*chunks)[(--count)];
@@ -958,7 +945,7 @@ void Model::deleteAllChunks()
         Chunk *chunk = (*chunks)[i];
         Map::map_free(&chunk->map);
         Map::map_free(&chunk->lights);
-        sign_list_free(&chunk->signs);
+        //sign_list_free(&chunk->signs);
         del_buffer(chunk->buffer);
         del_buffer(chunk->sign_buffer);
     }
@@ -1071,7 +1058,7 @@ void Model::onKey(GLFWwindow *window, int key, int scancode, int action, int mod
                     Player *player = players;
                     int x, y, z, face;
                     if (hitTestFace(player, &x, &y, &z, &face)) {
-                        setSign(x, y, z, face, typing_buffer + 1);
+                        //setSign(x, y, z, face, typing_buffer + 1);
                     }
                 }
                 else if (typing_buffer[0] == '/') {
@@ -1276,16 +1263,16 @@ void Model::parseBuffer(char *buffer)
                 strncpy(player->name, name, MAX_NAME_LENGTH);
             }
         }
-        snprintf(
+        /*snprintf(
                  format, sizeof(format),
-                 "S,%%d,%%d,%%d,%%d,%%d,%%d,%%%d[^\n]", MAX_SIGN_LENGTH - 1);
+                 "S,%%d,%%d,%%d,%%d,%%d,%%d,%%%d[^\n]", MAX_SIGN_LENGTH - 1);*/
         int face;
-        char text[MAX_SIGN_LENGTH] = {0};
-        if (sscanf(line, format,
+        //char text[MAX_SIGN_LENGTH] = {0};
+        /*if (sscanf(line, format,
                    &bp, &bq, &bx, &by, &bz, &face, text) >= 6)
         {
             _setSign(bp, bq, bx, by, bz, face, text, 0);
-        }
+        }*/
         line = tokenize(NULL, "\n", &key);
     }
 }
