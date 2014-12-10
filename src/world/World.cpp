@@ -33,8 +33,8 @@ void World::createChunk(Chunk *chunk, int p, int q)
     WorkerItem *item = new WorkerItem();
     item->p = chunk->p;
     item->q = chunk->q;
-    item->block_maps[1][1] = &chunk->map;
-    item->light_maps[1][1] = &chunk->lights;
+    item->block_map = &chunk->map;
+    item->light_map = &chunk->lights;
     item->loadChunk();
     
 }
@@ -76,21 +76,22 @@ void World::genChunkBuffer(Chunk *chunk)
     WorkerItem *item = &_item;
     item->p = chunk->p;
     item->q = chunk->q;
-    for (int dp = -1; dp <= 1; dp++) {
-        for (int dq = -1; dq <= 1; dq++) {
-            Chunk *other = chunk;
-            if (dp || dq) {
-                other = findChunk(chunk->p + dp, chunk->q + dq);
-            }
-            if (other) {
-                item->block_maps[dp + 1][dq + 1] = &other->map;
-                item->light_maps[dp + 1][dq + 1] = &other->lights;
-            }
-            else {
-                item->block_maps[dp + 1][dq + 1] = 0;
-                item->light_maps[dp + 1][dq + 1] = 0;
-            }
-        }
+    int dp=0;
+    int dq=0;
+    Chunk *other = chunk;
+    if (dp || dq)
+    {
+        other = findChunk(chunk->p + dp, chunk->q + dq);
+    }
+    if (other)
+    {
+        item->block_map = &other->map;
+        item->light_map = &other->lights;
+    }
+    else
+    {
+        item->block_map = 0;
+        item->light_map = 0;
     }
     item->computeChunk(this);
     item->generateChunk(chunk);

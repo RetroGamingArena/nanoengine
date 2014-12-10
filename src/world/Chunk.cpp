@@ -14,7 +14,7 @@
 #include "MathUtils.h"
 #include "BufferUtils.h"
 
-int Chunk::distance(/*Chunk *chunk,*/ int p, int q)
+int Chunk::distance(int p, int q)
 {
     int dp = ABS(this->p - p);
     int dq = ABS(this->q - q);
@@ -35,25 +35,3 @@ int Chunk::chunked(float x)
     else
         return (base + 1)*-1;
 }
-
-/*void Chunk::genSignBuffer()
-{
-    // first pass - count characters
-    int max_faces = 0;
-    for (int i = 0; i < signs.size; i++) {
-        Sign *e = signs.data + i;
-        max_faces += strlen(e->text);
-    }
-    
-    // second pass - generate geometry
-    GLfloat *data = malloc_faces(5, max_faces);
-    int faces = 0;
-    for (int i = 0; i < signs.size; i++) {
-        Sign *e = signs.data + i;
-        faces += BufferUtils::_genSignBuffer(data + faces * 30, e->x, e->y, e->z, e->face, e->text);
-    }
-    
-    del_buffer(sign_buffer);
-    sign_buffer = gen_faces(5, faces, data);
-    sign_faces = faces;
-}*/

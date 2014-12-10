@@ -103,26 +103,27 @@ void Worker::ensureChunks(Player *player, Model* model)
     item.p = chunk->p;
     item.q = chunk->q;
     item.load = load;
-    for (int dp = -1; dp <= 1; dp++) {
-        for (int dq = -1; dq <= 1; dq++) {
+    //for (int dp = -1; dp <= 1; dp++) {
+    //    for (int dq = -1; dq <= 1; dq++) {
             Chunk *other = chunk;
-            if (dp || dq) {
-                other = model->chunks->findChunk(chunk->p + dp, chunk->q + dq);
+            //if (dp || dq)
+            {
+                other = model->chunks->findChunk(chunk->p/* + dp*/, chunk->q/* + dq*/);
             }
             if (other) {
                 Map *block_map = (Map*)malloc(sizeof(Map));
                 Map::map_copy(block_map, &other->map);
                 Map *light_map = (Map*)malloc(sizeof(Map));
                 Map::map_copy(light_map, &other->lights);
-                item.block_maps[dp + 1][dq + 1] = block_map;
-                item.light_maps[dp + 1][dq + 1] = light_map;
+                item.block_map/*s[dp + 1][dq + 1]*/ = block_map;
+                item.light_map/*s[dp + 1][dq + 1]*/ = light_map;
             }
             else {
-                item.block_maps[dp + 1][dq + 1] = 0;
-                item.light_maps[dp + 1][dq + 1] = 0;
+                item.block_map/*s[dp + 1][dq + 1]*/ = 0;
+                item.light_map/*s[dp + 1][dq + 1]*/ = 0;
             }
-        }
-    }
+    //    }
+    //}
     chunk->dirty = 0;
     state = WORKER_BUSY;
     cnd_signal(&cnd);

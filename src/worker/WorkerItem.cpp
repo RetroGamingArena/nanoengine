@@ -17,7 +17,7 @@
 
 void WorkerItem::loadChunk()
 {
-    Map *block_map = block_maps[1][1];
+    Map *block_map = this->block_map;//s[1][1];
     block_map->createWorld(p, q);
 }
 
@@ -33,24 +33,19 @@ void WorkerItem::computeChunk(World *world)
     
     // check for lights
     int has_light = 0;
-    if (SHOW_LIGHTS) {
-        for (int a = 0; a < 3; a++) {
-            for (int b = 0; b < 3; b++) {
-                Map *map = light_maps[a][b];
-                if (map && map->size) {
-                    has_light = 1;
-                }
-            }
+    if (SHOW_LIGHTS)
+    {
+        Map *map = light_map;
+        if (map && map->size)
+        {
+            has_light = 1;
         }
     }
     
     // populate opaque array
-    for (int a = 0; a < 3; a++) {
-        for (int b = 0; b < 3; b++) {
-            Map *map = block_maps[a][b];
-            if (!map) {
-                continue;
-            }
+    Map *map = block_map;
+    if (map)
+    {
             MAP_FOR_EACH(map, ex, ey, ez, ew) {
                 
                 int rawx = Map::getX(i);
@@ -65,7 +60,6 @@ void WorkerItem::computeChunk(World *world)
                 int y = 0;
                 int z = 0;
                 
-                //if(entry->e.computed)
                 {
                     x = x2;
                     y = y2;
@@ -87,18 +81,16 @@ void WorkerItem::computeChunk(World *world)
                 }
             } END_MAP_FOR_EACH;
         }
-    }
+    //}
     
     // flood fill light intensities
-    if (has_light) {
-        for (int a = 0; a < 3; a++) {
-            for (int b = 0; b < 3; b++) {
-                Map *map = light_maps[a][b];
-                if (!map) {
-                    continue;
-                }
-                MAP_FOR_EACH(map, ex, ey, ez, ew)
-                {
+    if (has_light)
+    {
+        Map *map = light_map;
+        if (map)
+        {
+            MAP_FOR_EACH(map, ex, ey, ez, ew)
+            {
                     int rawx = Map::getX(i);
                     int rawy = Map::getY(i);
                     int rawz = Map::getZ(i);
@@ -111,24 +103,19 @@ void WorkerItem::computeChunk(World *world)
                     int y = 0;
                     int z = 0;
                     
-                    //if(entry->e.computed)
                     {
                         x = x2;
                         y = y2;
                         z = z2;
                     }
                     
-                    //int x = //ex - ox;
-                    //int y = //ey - oy;
-                    //int z = //ez - oz;
-                    
                     MathUtils::lightFill(opaque, light, x, y, z, ew, 1);
                 } END_MAP_FOR_EACH;
             }
-        }
-    }
     
-    Map *map = block_maps[1][1];
+        }
+    
+    map = block_map;
     
     // count exposed faces
     int miny = 256;
@@ -151,18 +138,11 @@ void WorkerItem::computeChunk(World *world)
         int y = 0;
         int z = 0;
         
-        //if(entry->e.computed)
-        {
-            x = x2;
-            y = y2;
-            z = z2;
-        }
+        x = x2;
+        y = y2;
+        z = z2;
         
         int ey = y + map->dy;
-        
-        //int x = //ex - ox;
-        //int y = //ey - oy;
-        //int z = //ez - oz;
         
         int f1 = !opaque[XYZ(x - 1, y, z)];
         int f2 = !opaque[XYZ(x + 1, y, z)];
@@ -201,17 +181,10 @@ void WorkerItem::computeChunk(World *world)
         int x = 0;
         int y = 0;
         int z = 0;
-        
-        //if(entry->e.computed)
-        {
-            x = x2;
-            y = y2;
-            z = z2;
-        }
-        
-        //int x = //ex - ox;
-        //int y = //ey - oy;
-        //int z = //ez - oz;
+
+        x = x2;
+        y = y2;
+        z = z2;
         
         int ex = x + map->dx;
         int ey = y + map->dy;
@@ -276,21 +249,11 @@ void WorkerItem::computeChunk(World *world)
             int testX = mapX+p*CHUNK_SIZE-1;
             int testY = mapY;
             int testZ = mapZ+q*CHUNK_SIZE-1;
-
-            /*ex = testX;
-            ey = testY;
-            ez = testZ;*/
-        
-            //printf("%i %i %i : %i\n", testX - ex, testY - ey, testZ - ez, i);
             
             make_cube(
                       data + offset, ao, light,
                       f1, f2, f3, f4, f5, f6,
                       testX, testY, testZ, 0, 0, 0, 0.5*CHUNK_RES, ew);
-            /*make_cube(
-                      data + offset, ao, light,
-                      f1, f2, f3, f4, f5, f6,
-                      ex, ey, ez, 0, 0, 0, 0.5*CHUNK_RES, ew);*/
         }
         offset += total * 60;
     } END_MAP_FOR_EACH;
@@ -313,5 +276,4 @@ void WorkerItem::generateChunk(Chunk *chunk)
     
     del_buffer(chunk->buffer);
     chunk->buffer = gen_faces(10, faces, data);
-    //chunk->genSignBuffer();
 }
