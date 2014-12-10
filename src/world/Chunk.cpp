@@ -42,10 +42,6 @@ int Chunk::chunked(float x)
 
 void Chunk::generate()
 {
-    /*this->miny = miny;
-    this->maxy = maxy;
-    this->faces = faces;*/
-    
     del_buffer(buffer);
     buffer = gen_faces(10, faces, data);
 }
@@ -271,18 +267,11 @@ void Chunk::compute()
         }
         else {
             
-            int mapX = Map::getX(i);
+            int mapX = Map::getX(i)+p*CHUNK_SIZE-1;
             int mapY = Map::getY(i);
-            int mapZ = Map::getZ(i);
+            int mapZ = Map::getZ(i)+q*CHUNK_SIZE-1;
             
-            int testX = mapX+p*CHUNK_SIZE-1;
-            int testY = mapY;
-            int testZ = mapZ+q*CHUNK_SIZE-1;
-            
-            make_cube(
-                      data + offset, ao, light,
-                      f1, f2, f3, f4, f5, f6,
-                      testX, testY, testZ, 0, 0, 0, 0.5*CHUNK_RES, ew);
+            make_cube(data + offset, ao, light, f1, f2, f3, f4, f5, f6, mapX, mapY, mapZ, 0, 0, 0, CHUNK_RES, ew);
         }
         offset += total * 60;
     } END_MAP_FOR_EACH;

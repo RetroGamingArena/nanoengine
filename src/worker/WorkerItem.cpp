@@ -20,14 +20,3 @@ void WorkerItem::loadChunk()
     Map *block_map = this->block_map;
     block_map->createWorld(p, q);
 }
-
-
-/*void WorkerItem::generateChunk(Chunk *chunk)
-{
-    chunk->miny = miny;
-    chunk->maxy = maxy;
-    chunk->faces = faces;
-    
-    del_buffer(chunk->buffer);
-    chunk->buffer = gen_faces(10, faces, data);
-}*/
