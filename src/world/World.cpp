@@ -14,27 +14,11 @@ World::World(int p, int q)
     this->p = p;
     this->q = q;
     
-    int r = 1;
-    for (int dp = -r; dp <= r; dp++)
-    {
-        for (int dq = -r; dq <= r; dq++)
-        {
-            int a = p + dp;
-            int b = q + dq;
-            Chunk *chunk = 0;/*findChunk(a, b);
-            if (chunk) {
-                if (chunk->dirty) {
-                    genChunkBuffer(chunk);
-                }
-            }
-            else if (chunks->size() < MAX_CHUNKS) */{
-                push_back(new Chunk(a, b));
-                chunk = (*this)[this->size()-1];
-                createChunk(chunk, a, b);
-                genChunkBuffer(chunk);
-            }
-        }
-    }
+    push_back(new Chunk(p, q));
+    Chunk* chunk = (*this)[this->size()-1];
+    createChunk(chunk, p, q);
+    genChunkBuffer(chunk);
+    
 }
 
 Chunk* World::getChunk(int p, int q)
@@ -46,8 +30,7 @@ void World::createChunk(Chunk *chunk, int p, int q)
 {
     initChunk(chunk, p, q);
     
-    WorkerItem _item;
-    WorkerItem *item = &_item;
+    WorkerItem *item = new WorkerItem();
     item->p = chunk->p;
     item->q = chunk->q;
     item->block_maps[1][1] = &chunk->map;
@@ -68,7 +51,7 @@ void World::initChunk(Chunk *chunk, int p, int q)
     int dx = p * CHUNK_SIZE - 1;
     int dy = 0;
     int dz = q * CHUNK_SIZE - 1;
-    chunk->map = Map(dx, dy, dz, 34*34*32);//0x7fff+(32*2+1)*32);
+    chunk->map = Map(dx, dy, dz, 34*34*32);
     chunk->lights = Map(dx, dy, dz, 0xf);
 }
 

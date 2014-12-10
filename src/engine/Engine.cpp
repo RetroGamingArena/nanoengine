@@ -134,8 +134,6 @@ void Engine::render(Player* player)
 {
     glClear(GL_COLOR_BUFFER_BIT);
     glClear(GL_DEPTH_BUFFER_BIT);
-    /*for(int i = 0 ; i < views.size(); i++)
-        views[i]->render(model, player);*/
 }
 
 void Engine::checkWorkers()

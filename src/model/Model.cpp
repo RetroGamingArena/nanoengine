@@ -1177,7 +1177,7 @@ void Model::onMiddleClick()
     }
 }
 
-void Model::parseBuffer(char *buffer)
+/*void Model::parseBuffer(char *buffer)
 {
     Player *me = players;
     State *s = &players->state;
@@ -1265,7 +1265,7 @@ void Model::parseBuffer(char *buffer)
 
         line = tokenize(NULL, "\n", &key);
     }
-}
+}*/
 
 void Model::handleMouseInput()
 {
@@ -1392,7 +1392,7 @@ void Model::handleMovement(double dt)
     
 }
 
-void Model::onChar(GLFWwindow *window, unsigned int u)
+/*void Model::onChar(GLFWwindow *window, unsigned int u)
 {
     if (suppress_char) {
         suppress_char = 0;
@@ -1424,23 +1424,4 @@ void Model::onChar(GLFWwindow *window, unsigned int u)
             typing_buffer[1] = '\0';
         }
     }
-}
-
-void Model::onScroll(GLFWwindow *window, double xdelta, double ydelta)
-{
-    static double ypos = 0;
-    ypos += ydelta;
-    if (ypos < -SCROLL_THRESHOLD) {
-        item_index = (item_index + 1) % item_count;
-        ypos = 0;
-    }
-    if (ypos > SCROLL_THRESHOLD)
-    {
-        item_index--;
-        if (item_index < 0)
-        {
-            item_index = item_count - 1;
-        }
-        ypos = 0;
-    }
-}
+}*/

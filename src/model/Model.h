@@ -43,13 +43,11 @@ class Model
 public:
     GLFWwindow *window;
     
-    //vector<Chunk*> chunks;
     World* chunks;
     
     int create_radius;
     int render_radius;
     int delete_radius;
-    //int sign_radius;
     Player players[MAX_PLAYERS];
     int player_count;
     int typing;
@@ -85,7 +83,6 @@ public:
     int collide(int height, float *x, float *y, float *z);
     int highestBlock(float x, float z);
     int chunkVisible(float planes[6][4], int p, int q, int miny, int maxy);
-    //void createChunk(Chunk *chunk, int p, int q);
     void deletePlayer(int id);
     void deleteAllPlayers();
     void deleteChunks();
@@ -93,23 +90,18 @@ public:
     void handleMouseInput();
     void handleMovement(double dt);
     void setBlock(int x, int y, int z, int w);
-    //void unsetSign(int x, int y, int z);
-    //void unsetSignFace(int x, int y, int z, int face);
     void _setSign(int p, int q, int x, int y, int z, int face, const char *text, int dirty);
     void parseCommand(const char *buffer, int forward);
     void checkWorkers();
     void forceChunks(Player *player);
     void initWorld(Player *player);
-    void parseBuffer(char *buffer);
+    //void parseBuffer(char *buffer);
     void onLight();
     void onMiddleClick();
-    void onScroll(GLFWwindow *window, double xdelta, double ydelta);
-    void onChar(GLFWwindow *window, unsigned int u);
+    //void onChar(GLFWwindow *window, unsigned int u);
     int hitTestFace(Player *player, int *x, int *y, int *z, int *face);
     int hitTest(int previous, float x, float y, float z, float rx, float ry, int *bx, int *by, int *bz);
     static int chunked(float x);
-    //void setSign(int x, int y, int z, int face, const char *text);
-    //Chunk *findChunk(int p, int q);
     void addMessage(const char *text);
     void onMouseButton(GLFWwindow *window, int button, int action, int mods);
     void toggleLight(int x, int y, int z);
@@ -125,10 +117,8 @@ public:
     void cube(Block *b1, Block *b2, int fill);
     void sphere(Block *center, int radius, int fill, int fx, int fy, int fz);
     void cylinder(Block *b1, Block *b2, int radius, int fill);
-    //void dirtyChunk(Chunk *chunk);
     void setLight(int p, int q, int x, int y, int z, int w);
     void builderBlock(int x, int y, int z, int w);
-    //int hasLights(Chunk *chunk);
     void requestChunk(int p, int q);
     void initChunk(Chunk *chunk, int p, int q);
     void onLeftClick();

@@ -57,7 +57,6 @@ class Engine
     void initViews();
     void initWorkers();
     void ensureChunks(Player *player);
-    //void ensureChunksWorker(Player *player, Worker *worker);
     void loadShader();
     void resize();
     void render(Player* player);
