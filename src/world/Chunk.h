@@ -12,7 +12,6 @@
 #include "glew.h"
 
 #include "map.h"
-//#include "sign.h"
 
 class Chunk
 {
@@ -29,11 +28,13 @@ class Chunk
     int maxy;
     GLuint buffer;
     GLuint sign_buffer;
+    GLfloat *data;
     
     Chunk(int p, int q){this->p = p; this->q = q;};
     int distance(int p, int q);
     static int chunked(float x);
-    //void genSignBuffer();
+    void generate(/*int minx, int miny, int faces*/);
+    void compute();
 };
 
 #endif /* defined(__Nanocraft__Chunk__) */

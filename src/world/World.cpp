@@ -93,8 +93,9 @@ void World::genChunkBuffer(Chunk *chunk)
         item->block_map = 0;
         item->light_map = 0;
     }
-    item->computeChunk(this);
-    item->generateChunk(chunk);
+    chunk->compute();
+    //item->computeChunk(this);
+    chunk->generate();
     chunk->dirty = 0;
 }
 

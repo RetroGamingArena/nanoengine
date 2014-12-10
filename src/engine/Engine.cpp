@@ -147,30 +147,27 @@ void Engine::checkWorkers()
             Chunk *chunk = model->chunks->findChunk(item->p, item->q);
             if (chunk) {
                 if (item->load) {
-                    Map *block_map = item->block_map;//s[1][1];
-                    Map *light_map = item->light_map;//s[1][1];
+                    Map *block_map = item->block_map;
+                    Map *light_map = item->light_map;
                     Map::map_free(&chunk->map);
                     Map::map_free(&chunk->lights);
                     Map::map_copy(&chunk->map, block_map);
                     Map::map_copy(&chunk->lights, light_map);
                     model->requestChunk(item->p, item->q);
                 }
-                item->generateChunk(chunk);
+                chunk->compute();
+                chunk->generate();
             }
-            //for (int a = 0; a < 3; a++) {
-            //    for (int b = 0; b < 3; b++) {
-                    Map *block_map = item->block_map;//s[a][b];
-                    Map *light_map = item->light_map;//s[a][b];
-                    if (block_map) {
-                        Map::map_free(block_map);
-                        free(block_map);
-                    }
-                    if (light_map) {
-                        Map::map_free(light_map);
-                        free(light_map);
-                    }
-            //    }
-            //}
+            Map *block_map = item->block_map;
+            Map *light_map = item->light_map;
+            if (block_map) {
+                Map::map_free(block_map);
+                free(block_map);
+            }
+            if (light_map) {
+            Map::map_free(light_map);
+                free(light_map);
+            }
             worker->state = WORKER_IDLE;
         }
         mtx_unlock(&worker->mtx);

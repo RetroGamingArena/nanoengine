@@ -21,16 +21,15 @@ class WorkerItem
         int p;
         int q;
         int load;
-        Map *block_map;//[3][3];
-        Map *light_map;//[3][3];
-        int miny;
-        int maxy;
-        int faces;
-        GLfloat *data;
+        Map *block_map;
+        Map *light_map;
+        //int miny;
+        //int maxy;
+        //int faces;
+        //GLfloat *data;
     
         void loadChunk();
-        void computeChunk(World* world);
-        void generateChunk(Chunk* chunk);
+        //void computeChunk(World* world);
 };
 
 #endif /* defined(__Nanocraft__WorkerItem__) */

@@ -32,7 +32,8 @@ int Worker::worker_run(void *arg)
         {
             item->loadChunk();
         }
-        item->computeChunk(model->chunks);
+        model->chunks->at(0)->compute();
+        //item->computeChunk(model->chunks);
         mtx_lock(&worker->mtx);
         worker->state = WORKER_DONE;
         mtx_unlock(&worker->mtx);
