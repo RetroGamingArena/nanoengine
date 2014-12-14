@@ -35,8 +35,8 @@ void World::createChunk(Chunk *chunk, int p, int q)
     item->q = chunk->q;
     item->block_map = &chunk->map;
     item->light_map = &chunk->lights;
-    item->loadChunk();
-    
+    //item->loadChunk();
+    /**/item->block_map->createWorld(item->p,item->q);
 }
 
 void World::initChunk(Chunk *chunk, int p, int q)

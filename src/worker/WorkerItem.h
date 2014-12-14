@@ -23,8 +23,6 @@ class WorkerItem
         int load;
         Map *block_map;
         Map *light_map;
-    
-        void loadChunk();
 };
 
 #endif /* defined(__Nanocraft__WorkerItem__) */

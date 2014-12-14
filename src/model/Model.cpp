@@ -872,39 +872,6 @@ void Model::requestChunk(int p, int q)
     client_chunk(p, q, key);
 }
 
-/*void Model::initChunk(Chunk *chunk, int p, int q)
-{
-    chunkchun p;
-    chunk->q = q;
-    chunk->faces = 0;
-    chunk->sign_faces = 0;
-    chunk->buffer = 0;
-    chunk->sign_buffer = 0;
-    dirtyChunk(chunk);
-    Map *block_map = &chunk->map;
-    Map *light_map = &chunk->lights;
-    int dx = p * CHUNK_SIZE - 1;
-    int dy = 0;
-    int dz = q * CHUNK_SIZE - 1;
-    Map::map_alloc(block_map, dx, dy, dz, 0x7fff);
-    Map::map_alloc(light_map, dx, dy, dz, 0xf);
-}*/
-
-/*void Model::createChunk(Chunk *chunk, int p, int q)
-{
-    initChunk(chunk, p, q);
-    
-    WorkerItem _item;
-    WorkerItem *item = &_item;
-    item->p = chunk->p;
-    item->q = chunk->q;
-    item->block_maps[1][1] = &chunk->map;
-    item->light_maps[1][1] = &chunk->lights;
-    item->loadChunk();
-    
-    requestChunk(p, q);
-}*/
-
 void Model::deleteChunks()
 {
     int count = (int)chunks->size();
@@ -1177,95 +1144,6 @@ void Model::onMiddleClick()
     }
 }
 
-/*void Model::parseBuffer(char *buffer)
-{
-    Player *me = players;
-    State *s = &players->state;
-    char *key;
-    char *line = tokenize(buffer, "\n", &key);
-    while (line) {
-        int pid;
-        float ux, uy, uz, urx, ury;
-        if (sscanf(line, "U,%d,%f,%f,%f,%f,%f",
-                   &pid, &ux, &uy, &uz, &urx, &ury) == 6)
-        {
-            me->id = pid;
-            s->x = ux; s->y = uy; s->z = uz; s->rx = urx; s->ry = ury;
-            forceChunks(me);
-            if (uy == 0) {
-                s->y = highestBlock(s->x, s->z) + 2;
-            }
-        }
-        int bp, bq, bx, by, bz, bw;
-        if (sscanf(line, "B,%d,%d,%d,%d,%d,%d",
-                   &bp, &bq, &bx, &by, &bz, &bw) == 6)
-        {
-            _setBlock(bp, bq, bx, by, bz, bw, 0);
-            if (MathUtils::playerIntersectsBlock(2, s->x, s->y, s->z, bx, by, bz)) {
-                s->y = highestBlock(s->x, s->z) + 2;
-            }
-        }
-        if (sscanf(line, "L,%d,%d,%d,%d,%d,%d",
-                   &bp, &bq, &bx, &by, &bz, &bw) == 6)
-        {
-            setLight(bp, bq, bx, by, bz, bw);
-        }
-        float px, py, pz, prx, pry;
-        if (sscanf(line, "P,%d,%f,%f,%f,%f,%f",
-                   &pid, &px, &py, &pz, &prx, &pry) == 6)
-        {
-            Player *player = findPlayer(pid);
-            if (!player && player_count < MAX_PLAYERS) {
-                player = players + player_count;
-                player_count++;
-                player->id = pid;
-                player->buffer = 0;
-                snprintf(player->name, MAX_NAME_LENGTH, "player%d", pid);
-                player->update(px, py, pz, prx, pry, 1); // twice
-            }
-            if (player) {
-                player->update(px, py, pz, prx, pry, 1);
-            }
-        }
-        if (sscanf(line, "D,%d", &pid) == 1) {
-            deletePlayer(pid);
-        }
-        int kp, kq, kk;
-        if (sscanf(line, "K,%d,%d,%d", &kp, &kq, &kk) == 3) {
-            //db_set_key(kp, kq, kk);
-        }
-        if (sscanf(line, "R,%d,%d", &kp, &kq) == 2) {
-            Chunk *chunk = chunks->findChunk(kp, kq);
-            if (chunk) {
-                chunks->dirtyChunk(chunk);
-            }
-        }
-        double elapsed;
-        int day_length;
-        if (sscanf(line, "E,%lf,%d", &elapsed, &day_length) == 2) {
-            AbstractWindow* window = Engine::getInstance()->getAbstractWindow();
-            glfwSetTime(fmod(elapsed, day_length));
-            window->day_length = day_length;
-            time_changed = 1;
-        }
-        if (line[0] == 'T' && line[1] == ',') {
-            char *text = line + 2;
-            addMessage(text);
-        }
-        char format[64];
-        snprintf(
-                 format, sizeof(format), "N,%%d,%%%ds", MAX_NAME_LENGTH - 1);
-        char name[MAX_NAME_LENGTH];
-        if (sscanf(line, format, &pid, name) == 2) {
-            Player *player = findPlayer(pid);
-            if (player) {
-                strncpy(player->name, name, MAX_NAME_LENGTH);
-            }
-        }
-
-        line = tokenize(NULL, "\n", &key);
-    }
-}*/
 
 void Model::handleMouseInput()
 {
@@ -1391,37 +1269,3 @@ void Model::handleMovement(double dt)
     }
     
 }
-
-/*void Model::onChar(GLFWwindow *window, unsigned int u)
-{
-    if (suppress_char) {
-        suppress_char = 0;
-        return;
-    }
-    if (typing) {
-        if (u >= 32 && u < 128) {
-            char c = (char)u;
-            int n = (int)strlen(typing_buffer);
-            if (n < MAX_TEXT_LENGTH - 1) {
-                typing_buffer[n] = c;
-                typing_buffer[n + 1] = '\0';
-            }
-        }
-    }
-    else {
-        if (u == CRAFT_KEY_CHAT) {
-            typing = 1;
-            typing_buffer[0] = '\0';
-        }
-        if (u == CRAFT_KEY_COMMAND) {
-            typing = 1;
-            typing_buffer[0] = '/';
-            typing_buffer[1] = '\0';
-        }
-        if (u == CRAFT_KEY_SIGN) {
-            typing = 1;
-            typing_buffer[0] = CRAFT_KEY_SIGN;
-            typing_buffer[1] = '\0';
-        }
-    }
-}*/

@@ -30,7 +30,7 @@ int Worker::worker_run(void *arg)
         WorkerItem *item = &worker->item;
         if (item->load)
         {
-            item->loadChunk();
+            item->block_map->createWorld(item->p, item->q);
         }
         model->chunks->at(0)->compute();
         //item->computeChunk(model->chunks);

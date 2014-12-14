@@ -14,9 +14,3 @@
 #include "item.h"
 #include "noise.h"
 #include "util.h"
-
-void WorkerItem::loadChunk()
-{
-    Map *block_map = this->block_map;
-    block_map->createWorld(p, q);
-}
