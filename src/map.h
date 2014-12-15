@@ -45,6 +45,8 @@ class Map
         static int getZ(int index);
         int _hitTest(float max_distance, int previous, float x, float y, float z, float vx, float vy, float vz, int *hx, int *hy, int *hz);
         //int hitTestFace(Player *player, int *x, int *y, int *z, int *face);
+    
+        nano_row* getDatas(){return data;};
         nano getData(int i)
         {
             int itemsPerRow = 8 / ITEM_RANGE;
@@ -82,7 +84,17 @@ class Map
     void createWorld(int p, int q);
     Map(){};
     Map(int dx, int dy, int dz, int mask);
-    //static void map_alloc(Map *map, int dx, int dy, int dz, int mask);
+    /*Map(Map* other)
+    {
+        this->dx = other->dx;
+        this->dy = other->dy;
+        this->dz = other->dz;
+        this->mask = other->mask;
+        this->size = other->size;
+        this->data = new nano_row[(this->mask + 1) / (8/ITEM_RANGE)];
+        for(int i = 0 ; i < ((this->mask + 1) / (8/ITEM_RANGE)); i++)
+            this->data[i] = other->data[i];
+    };*/
     static void map_free(Map *map);
     static void map_copy(Map *dst, Map *src);
     static void map_grow(Map *map);

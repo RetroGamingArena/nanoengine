@@ -149,10 +149,17 @@ void Engine::checkWorkers()
                 if (item->load) {
                     Map *block_map = item->block_map;
                     Map *light_map = item->light_map;
+                    
                     Map::map_free(&chunk->map);
                     Map::map_free(&chunk->lights);
                     Map::map_copy(&chunk->map, block_map);
                     Map::map_copy(&chunk->lights, light_map);
+                    
+                    /*delete[] chunk->map.getDatas();
+                    delete[] chunk->lights.getDatas();
+                    chunk->map = new Map(block_map);
+                    chunk->lights = new Map(block_map);*/
+                    
                     model->requestChunk(item->p, item->q);
                 }
                 chunk->compute();
@@ -177,7 +184,6 @@ void Engine::checkWorkers()
 void Engine::ensureChunks(Player *player)
 {
     checkWorkers();
-    //forceChunks(player);
     for (int i = 0; i < workers.size(); i++) {
         Worker *worker = workers[i];
         mtx_lock(&worker->mtx);

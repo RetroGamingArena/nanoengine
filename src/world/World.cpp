@@ -31,12 +31,12 @@ void World::createChunk(Chunk *chunk, int p, int q)
     initChunk(chunk, p, q);
     
     WorkerItem *item = new WorkerItem();
+    item->chunk = chunk;
     item->p = chunk->p;
     item->q = chunk->q;
     item->block_map = &chunk->map;
     item->light_map = &chunk->lights;
-    //item->loadChunk();
-    /**/item->block_map->createWorld(item->p,item->q);
+    item->block_map->createWorld(item->p,item->q);
 }
 
 void World::initChunk(Chunk *chunk, int p, int q)
@@ -58,13 +58,15 @@ void World::initChunk(Chunk *chunk, int p, int q)
 void World::dirtyChunk(Chunk *chunk)
 {
     chunk->dirty = 1;
-    if (hasLights(chunk)) {
-        for (int dp = -1; dp <= 1; dp++) {
-            for (int dq = -1; dq <= 1; dq++) {
+    if (hasLights(chunk))
+    {
+        for (int dp = -1; dp <= 1; dp++)
+        {
+            for (int dq = -1; dq <= 1; dq++)
+            {
                 Chunk *other = findChunk(chunk->p + dp, chunk->q + dq);
-                if (other) {
+                if (other)
                     other->dirty = 1;
-                }
             }
         }
     }
@@ -74,6 +76,7 @@ void World::genChunkBuffer(Chunk *chunk)
 {
     WorkerItem _item;
     WorkerItem *item = &_item;
+    item->chunk = chunk;
     item->p = chunk->p;
     item->q = chunk->q;
     int dp=0;
@@ -94,29 +97,26 @@ void World::genChunkBuffer(Chunk *chunk)
         item->light_map = 0;
     }
     chunk->compute();
-    //item->computeChunk(this);
     chunk->generate();
     chunk->dirty = 0;
 }
 
 int World::hasLights(Chunk *chunk)
 {
-    if (!SHOW_LIGHTS) {
+    if (!SHOW_LIGHTS)
         return 0;
-    }
-    for (int dp = -1; dp <= 1; dp++) {
-        for (int dq = -1; dq <= 1; dq++) {
+    for (int dp = -1; dp <= 1; dp++)
+    {
+        for (int dq = -1; dq <= 1; dq++)
+        {
             Chunk *other = chunk;
-            if (dp || dq) {
+            if (dp || dq)
                 other = findChunk(chunk->p + dp, chunk->q + dq);
-            }
-            if (!other) {
+            if (!other)
                 continue;
-            }
             Map *map = &other->lights;
-            if (map->size) {
+            if (map->size)
                 return 1;
-            }
         }
     }
     return 0;
@@ -124,11 +124,11 @@ int World::hasLights(Chunk *chunk)
 
 Chunk *World::findChunk(int p, int q)
 {
-    for (int i = 0; i < size(); i++) {
+    for (int i = 0; i < size(); i++)
+    {
         Chunk *chunk = (*this)[i];
-        if (chunk->p == p && chunk->q == q) {
+        if (chunk->p == p && chunk->q == q)
             return chunk;
-        }
     }
     return 0;
 }

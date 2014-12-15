@@ -5,23 +5,6 @@
 #include "util.h"
 #include "noise.h"
 
-/*int hash_int(int key) {
-    key = ~key + (key << 15);
-    key = key ^ (key >> 12);
-    key = key + (key << 2);
-    key = key ^ (key >> 4);
-    key = key * 2057;
-    key = key ^ (key >> 16);
-    return key;
-}
-
-int hash(int x, int y, int z) {
-    x = hash_int(x);
-    y = hash_int(y);
-    z = hash_int(z);
-    return x ^ y ^ z;
-}*/
-
 Map::Map(int dx, int dy, int dz, int mask)
 {
     this->dx = dx;
@@ -29,7 +12,10 @@ Map::Map(int dx, int dy, int dz, int mask)
     this->dz = dz;
     this->mask = mask;
     this->size = 0;
+    //this->data = new nano_row[(this->mask + 1) / (8/ITEM_RANGE)];
     this->data = (nano_row *)calloc((this->mask + 1) / (8/ITEM_RANGE), sizeof(nano_row));
+    //for(int i = 0 ; i < ((this->mask + 1) / (8/ITEM_RANGE)); i++)
+    //    this->data[i] = 0;
 }
 
 void Map::map_free(Map *map) {
