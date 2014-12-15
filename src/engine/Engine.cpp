@@ -150,8 +150,11 @@ void Engine::checkWorkers()
                     Map *block_map = item->block_map;
                     Map *light_map = item->light_map;
                     
-                    Map::map_free(&chunk->map);
-                    Map::map_free(&chunk->lights);
+                    delete[] chunk->map.getDatas();
+                    delete[] chunk->lights.getDatas();
+                    
+                    //Map::map_free(&chunk->map);
+                    //Map::map_free(&chunk->lights);
                     Map::map_copy(&chunk->map, block_map);
                     Map::map_copy(&chunk->lights, light_map);
                     
@@ -168,11 +171,13 @@ void Engine::checkWorkers()
             Map *block_map = item->block_map;
             Map *light_map = item->light_map;
             if (block_map) {
-                Map::map_free(block_map);
+                delete[] block_map->getDatas();
+                //Map::map_free(block_map);
                 free(block_map);
             }
             if (light_map) {
-            Map::map_free(light_map);
+                delete[] light_map->getDatas();
+            //Map::map_free(light_map);
                 free(light_map);
             }
             worker->state = WORKER_IDLE;

@@ -18,9 +18,9 @@ Map::Map(int dx, int dy, int dz, int mask)
     //    this->data[i] = 0;
 }
 
-void Map::map_free(Map *map) {
+/*void Map::map_free(Map *map) {
     free(map->data);
-}
+}*/
 
 void Map::map_copy(Map *dst, Map *src) {
     dst->dx = src->dx;

@@ -892,8 +892,12 @@ void Model::deleteChunks()
             }
         }
         if (_delete) {
-            Map::map_free(&chunk->map);
-            Map::map_free(&chunk->lights);
+            
+            delete[] chunk->map.getDatas();
+            delete[] chunk->lights.getDatas();
+            //Map::map_free(&chunk->map);
+            //Map::map_free(&chunk->lights);
+            
             //sign_list_free(&chunk->signs);
             del_buffer(chunk->buffer);
             del_buffer(chunk->sign_buffer);
@@ -909,8 +913,12 @@ void Model::deleteAllChunks()
     for (int i = 0; i < chunks->size(); i++)
     {
         Chunk *chunk = (*chunks)[i];
-        Map::map_free(&chunk->map);
-        Map::map_free(&chunk->lights);
+        
+        delete[] chunk->map.getDatas();
+        delete[] chunk->lights.getDatas();
+        //Map::map_free(&chunk->map);
+        //Map::map_free(&chunk->lights);
+        
         //sign_list_free(&chunk->signs);
         del_buffer(chunk->buffer);
         del_buffer(chunk->sign_buffer);
