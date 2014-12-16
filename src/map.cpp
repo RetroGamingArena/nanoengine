@@ -12,15 +12,10 @@ Map::Map(int dx, int dy, int dz, int mask)
     this->dz = dz;
     this->mask = mask;
     this->size = 0;
-    //this->data = new nano_row[(this->mask + 1) / (8/ITEM_RANGE)];
-    this->data = (nano_row *)calloc((this->mask + 1) / (8/ITEM_RANGE), sizeof(nano_row));
-    //for(int i = 0 ; i < ((this->mask + 1) / (8/ITEM_RANGE)); i++)
-    //    this->data[i] = 0;
+    this->data = new nano_row[(this->mask + 1) / (8/ITEM_RANGE)];
+    for(int i = 0 ; i < ((this->mask + 1) / (8/ITEM_RANGE)); i++)
+        this->data[i] = 0;
 }
-
-/*void Map::map_free(Map *map) {
-    free(map->data);
-}*/
 
 void Map::map_copy(Map *dst, Map *src) {
     dst->dx = src->dx;
@@ -79,7 +74,6 @@ int Map::set(int x, int y, int z, double dx, double dy, double dz, int w, bool e
 }
 
 int Map::map_get(Map *map, int x, int y, int z) {
-    //unsigned int index = hash(x, y, z) & map->mask;
     x -= map->dx;//-1;
     y -= map->dy;
     z -= map->dz;//-1;
@@ -91,38 +85,8 @@ int Map::map_get(Map *map, int x, int y, int z) {
     unsigned int index = getIndex(x,y%32,z);
     
     unsigned char entry = map->getData(index);
-    /*while (!EMPTY_ENTRY(entry))
-    {
-        if (entry->e.x == x && entry->e.y == y && entry->e.z == z)
-        {
-            return entry->e.w;
-        }
-        index = (index + 1) & map->mask;
-        entry = map->data + index;
-    }
-    return 0;*/
-    return entry/*->e.w*/;
+    return entry;
 }
-
-void Map::map_grow(Map *map) {
-    /*Map new_map(map->dx, map->dy, map->dz, (map->mask << 1) | 1);
-    
-    new_map.size = 0;
-    new_map.data = (MapEntry *)calloc(new_map.mask + 1, sizeof(MapEntry));
-    MAP_FOR_EACH(map, ex, ey, ez, ew) {
-        (&new_map)->set(ex, ey, ez, 0, 0, 0, ew,true);
-    } END_MAP_FOR_EACH;
-    free(map->data);
-    map->mask = new_map.mask;
-    map->size = new_map.size;
-    map->data = new_map.data;*/
-}
-
-/*void Map::mapSetFunc(int x, int y, int z, double dx, double dy, double dz, int w, void *arg)
-{
-    Map *map = (Map *)arg;
-    Map::map_set(map, x, y, z, dx, dy, dz, w);
-}*/
 
 void Map::createWorld(int p, int q)
 {

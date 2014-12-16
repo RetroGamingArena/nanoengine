@@ -18,7 +18,6 @@ class Chunk
     public:
     Map map;
     Map lights;
-    //SignList signs;
     int p;
     int q;
     int faces;
@@ -26,6 +25,7 @@ class Chunk
     int dirty;
     int miny;
     int maxy;
+    bool load;
     GLuint buffer;
     GLuint sign_buffer;
     GLfloat *data;

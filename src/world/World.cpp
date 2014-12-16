@@ -32,11 +32,11 @@ void World::createChunk(Chunk *chunk, int p, int q)
     
     WorkerItem *item = new WorkerItem();
     item->chunk = chunk;
-    item->p = chunk->p;
-    item->q = chunk->q;
+    //item->p = chunk->p;
+    //item->q = chunk->q;
     item->block_map = &chunk->map;
     item->light_map = &chunk->lights;
-    item->block_map->createWorld(item->p,item->q);
+    item->block_map->createWorld(chunk->p,chunk->q);
 }
 
 void World::initChunk(Chunk *chunk, int p, int q)
@@ -77,8 +77,8 @@ void World::genChunkBuffer(Chunk *chunk)
     WorkerItem _item;
     WorkerItem *item = &_item;
     item->chunk = chunk;
-    item->p = chunk->p;
-    item->q = chunk->q;
+    //item->p = chunk->p;
+    //item->q = chunk->q;
     int dp=0;
     int dq=0;
     Chunk *other = chunk;

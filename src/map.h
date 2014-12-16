@@ -96,7 +96,6 @@ class Map
             this->data[i] = other->data[i];
     };
     static void map_copy(Map *dst, Map *src);
-    static void map_grow(Map *map);
     int set(int x, int y, int z, double dx, double dy, double dz, int w, bool enabled);
     static int map_get(Map *map, int x, int y, int z);
     static void mapSetFunc(int x, int y, int z, double dx, double dy, double dz, int w, void *arg);

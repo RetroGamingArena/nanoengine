@@ -144,9 +144,9 @@ void Engine::checkWorkers()
         mtx_lock(&worker->mtx);
         if (worker->state == WORKER_DONE) {
             WorkerItem *item = &worker->item;
-            Chunk *chunk = model->chunks->findChunk(item->p, item->q);
+            Chunk *chunk = item->chunk;//model->chunks->findChunk(item->p, item->q);
             if (chunk) {
-                if (item->load) {
+                if (chunk->load/*item->load*/) {
                     Map *block_map = item->block_map;
                     Map *light_map = item->light_map;
                     
@@ -155,8 +155,6 @@ void Engine::checkWorkers()
                     
                     chunk->map = new Map(block_map);
                     chunk->lights = new Map(light_map);
-                    
-                    model->requestChunk(item->p, item->q);
                 }
                 chunk->compute();
                 chunk->generate();

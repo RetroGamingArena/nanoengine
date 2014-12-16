@@ -18,9 +18,9 @@
 class WorkerItem
 {
     public:
-        int p;
-        int q;
-        int load;
+        /*int p;
+        int q;*/
+        //int load;
         Map *block_map;
         Map *light_map;
         Chunk* chunk;

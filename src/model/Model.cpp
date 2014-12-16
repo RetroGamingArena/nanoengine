@@ -342,54 +342,6 @@ void Model::parseCommand(const char *buffer, int forward)
     else if (strcmp(buffer, "/copy") == 0) {
         copy();
     }
-    else if (strcmp(buffer, "/paste") == 0) {
-        paste();
-    }
-    else if (strcmp(buffer, "/tree") == 0) {
-        tree(&block0);
-    }
-    else if (sscanf(buffer, "/array %d %d %d", &xc, &yc, &zc) == 3) {
-        array(&block1, &block0, xc, yc, zc);
-    }
-    else if (sscanf(buffer, "/array %d", &count) == 1) {
-        array(&block1, &block0, count, count, count);
-    }
-    else if (strcmp(buffer, "/fcube") == 0) {
-        cube(&block0, &block1, 1);
-    }
-    else if (strcmp(buffer, "/cube") == 0) {
-        cube(&block0, &block1, 0);
-    }
-    else if (sscanf(buffer, "/fsphere %d", &radius) == 1) {
-        sphere(&block0, radius, 1, 0, 0, 0);
-    }
-    else if (sscanf(buffer, "/sphere %d", &radius) == 1) {
-        sphere(&block0, radius, 0, 0, 0, 0);
-    }
-    else if (sscanf(buffer, "/fcirclex %d", &radius) == 1) {
-        sphere(&block0, radius, 1, 1, 0, 0);
-    }
-    else if (sscanf(buffer, "/circlex %d", &radius) == 1) {
-        sphere(&block0, radius, 0, 1, 0, 0);
-    }
-    else if (sscanf(buffer, "/fcircley %d", &radius) == 1) {
-        sphere(&block0, radius, 1, 0, 1, 0);
-    }
-    else if (sscanf(buffer, "/circley %d", &radius) == 1) {
-        sphere(&block0, radius, 0, 0, 1, 0);
-    }
-    else if (sscanf(buffer, "/fcirclez %d", &radius) == 1) {
-        sphere(&block0, radius, 1, 0, 0, 1);
-    }
-    else if (sscanf(buffer, "/circlez %d", &radius) == 1) {
-        sphere(&block0, radius, 0, 0, 0, 1);
-    }
-    else if (sscanf(buffer, "/fcylinder %d", &radius) == 1) {
-        cylinder(&block0, &block1, radius, 1);
-    }
-    else if (sscanf(buffer, "/cylinder %d", &radius) == 1) {
-        cylinder(&block0, &block1, radius, 0);
-    }
     else if (forward) {
         client_talk(buffer);
     }
@@ -500,7 +452,7 @@ void Model::copy() {
     memcpy(&copy1, &block1, sizeof(Block));
 }
 
-void Model::paste() {
+/*void Model::paste() {
     Block *c1 = &copy1;
     Block *c2 = &copy0;
     Block *p1 = &block1;
@@ -683,7 +635,7 @@ void Model::cylinder(Block *b1, Block *b2, int radius, int fill)
             sphere(&block, radius, fill, 0, 0, 1);
         }
     }
-}
+}*/
 
 /*void Model::dirtyChunk(Chunk *chunk)
 {
@@ -731,41 +683,6 @@ void Model::setLight(int p, int q, int x, int y, int z, int w)
     }
 }
 
-void Model::builderBlock(int x, int y, int z, int w) {
-    if (y <= 0 || y >= 256) {
-        return;
-    }
-    if (is_destructable(getBlock(x, y, z))) {
-        setBlock(x, y, z, 0);
-    }
-    if (w) {
-        setBlock(x, y, z, w);
-    }
-}
-
-/*int Model::hasLights(Chunk *chunk)
-{
-    if (!SHOW_LIGHTS) {
-        return 0;
-    }
-    for (int dp = -1; dp <= 1; dp++) {
-        for (int dq = -1; dq <= 1; dq++) {
-            Chunk *other = chunk;
-            if (dp || dq) {
-                other = findChunk(chunk->p + dp, chunk->q + dq);
-            }
-            if (!other) {
-                continue;
-            }
-            Map *map = &other->lights;
-            if (map->size) {
-                return 1;
-            }
-        }
-    }
-    return 0;
-}*/
-
 int Model::collide(int height, State *s)
 {
     int result = 0;
@@ -796,8 +713,6 @@ int Model::collide(int height, State *s)
     }
     else
     {
-        //s->x = s->x - s->dx;
-        //s->z = s->z - s->dz;
         s->dx = 0;
         s->dz = 0;
     }
@@ -864,12 +779,6 @@ int Model::collide(int height, float *x, float *y, float *z)
         }
     }
     return result;
-}
-
-void Model::requestChunk(int p, int q)
-{
-    int key = 0;
-    client_chunk(p, q, key);
 }
 
 void Model::deleteChunks()

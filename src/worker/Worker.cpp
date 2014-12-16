@@ -28,9 +28,9 @@ int Worker::worker_run(void *arg)
         }
         mtx_unlock(&worker->mtx);
         WorkerItem *item = &worker->item;
-        if (item->load)
+        if (item->chunk->load/*item->load*/)
         {
-            item->block_map->createWorld(item->p, item->q);
+            item->block_map->createWorld(item->chunk->p, item->chunk->q);
         }
         model->chunks->at(0)->compute();
         //item->computeChunk(model->chunks);
@@ -87,7 +87,6 @@ void Worker::ensureChunks(Player *player, Model* model)
     int a = best_a;
     int b = best_b;
     int load = 0;
-    printf("%i %i\n",a,b);
     Chunk *chunk = model->chunks->findChunk(a, b);
     if (!chunk) {
         load = 1;
@@ -100,9 +99,10 @@ void Worker::ensureChunks(Player *player, Model* model)
             return;
         }
     }
-    item.p = chunk->p;
-    item.q = chunk->q;
-    item.load = load;
+    //item.p = chunk->p;
+    //item.q = chunk->q;
+    item.chunk = chunk;
+    item.chunk->load = load;
             Chunk *other = chunk;
             {
                 other = model->chunks->findChunk(chunk->p, chunk->q);

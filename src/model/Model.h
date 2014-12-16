@@ -95,10 +95,8 @@ public:
     void checkWorkers();
     void forceChunks(Player *player);
     void initWorld(Player *player);
-    //void parseBuffer(char *buffer);
     void onLight();
     void onMiddleClick();
-    //void onChar(GLFWwindow *window, unsigned int u);
     int hitTestFace(Player *player, int *x, int *y, int *z, int *face);
     int hitTest(int previous, float x, float y, float z, float rx, float ry, int *bx, int *by, int *bz);
     static int chunked(float x);
@@ -110,17 +108,8 @@ public:
     int getBlock(int x, int y, int z);
     int playerIntersectsBlock(int height, float x, float y, float z, int hx, int hy, int hz);
     void copy();
-    void paste();
     void onKey(GLFWwindow *window, int key, int scancode, int action, int mods);
-    void tree(Block *block);
-    void array(Block *b1, Block *b2, int xc, int yc, int zc);
-    void cube(Block *b1, Block *b2, int fill);
-    void sphere(Block *center, int radius, int fill, int fx, int fy, int fz);
-    void cylinder(Block *b1, Block *b2, int radius, int fill);
     void setLight(int p, int q, int x, int y, int z, int w);
-    void builderBlock(int x, int y, int z, int w);
-    void requestChunk(int p, int q);
-    void initChunk(Chunk *chunk, int p, int q);
     void onLeftClick();
     void onRightClick();
 };
