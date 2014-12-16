@@ -147,19 +147,20 @@ void Engine::checkWorkers()
             Chunk *chunk = item->chunk;//model->chunks->findChunk(item->p, item->q);
             if (chunk) {
                 if (chunk->load/*item->load*/) {
-                    Map *block_map = item->block_map;
+                    /*Map *block_map = item->block_map;
                     Map *light_map = item->light_map;
                     
                     delete[] chunk->map.getDatas();
                     delete[] chunk->lights.getDatas();
                     
                     chunk->map = new Map(block_map);
-                    chunk->lights = new Map(light_map);
+                    chunk->lights = new Map(light_map);*/
                 }
+                
                 chunk->compute();
                 chunk->generate();
             }
-            Map *block_map = item->block_map;
+            /*Map *block_map = item->block_map;
             Map *light_map = item->light_map;
             if (block_map) {
                 delete[] block_map->getDatas();
@@ -168,7 +169,7 @@ void Engine::checkWorkers()
             if (light_map) {
                 delete[] light_map->getDatas();
                 free(light_map);
-            }
+            }*/
             worker->state = WORKER_IDLE;
         }
         mtx_unlock(&worker->mtx);

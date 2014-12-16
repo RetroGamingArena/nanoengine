@@ -30,7 +30,7 @@ int Worker::worker_run(void *arg)
         WorkerItem *item = &worker->item;
         if (item->chunk->load/*item->load*/)
         {
-            item->block_map->createWorld(item->chunk->p, item->chunk->q);
+            item->chunk->map.createWorld(item->chunk->p, item->chunk->q);
         }
         model->chunks->at(0)->compute();
         //item->computeChunk(model->chunks);
@@ -99,31 +99,8 @@ void Worker::ensureChunks(Player *player, Model* model)
             return;
         }
     }
-    //item.p = chunk->p;
-    //item.q = chunk->q;
     item.chunk = chunk;
     item.chunk->load = load;
-            Chunk *other = chunk;
-            {
-                other = model->chunks->findChunk(chunk->p, chunk->q);
-            }
-            if (other) {
-                //Map *block_map = new Map(other->map);
-                //Map *light_map = new Map(other->lights);
-                
-                Map *block_map = (Map*)malloc(sizeof(Map));
-                Map::map_copy(block_map, &other->map);
-                Map *light_map = (Map*)malloc(sizeof(Map));
-                Map::map_copy(light_map, &other->lights);
-                
-                
-                item.block_map = block_map;
-                item.light_map = light_map;
-            }
-            else {
-                item.block_map = 0;
-                item.light_map = 0;
-            }
     chunk->dirty = 0;
     state = WORKER_BUSY;
     cnd_signal(&cnd);
