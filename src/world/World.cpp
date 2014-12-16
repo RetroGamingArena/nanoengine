@@ -15,10 +15,7 @@ World::World(int p, int q)
     this->q = q;
     
     push_back(new Chunk(p, q));
-    
     Chunk* chunk = (*this)[this->size()-1];
-    
-    //createChunk(chunk, p, q);
     
     genChunkBuffer(chunk);
 }
@@ -27,20 +24,6 @@ Chunk* World::getChunk(int p, int q)
 {
     return 0;
 }
-
-/*void World::createChunk(Chunk *chunk, int p, int q)
-{
-    initChunk(chunk, p, q);
-    
-    chunk->map->createWorld(chunk->p,chunk->q);
-}
-
-void World::initChunk(Chunk *chunk, int p, int q)
-{
-
-    
-    dirtyChunk(chunk);
-}*/
 
 void World::dirtyChunk(Chunk *chunk)
 {
@@ -61,16 +44,6 @@ void World::dirtyChunk(Chunk *chunk)
 
 void World::genChunkBuffer(Chunk *chunk)
 {
-    WorkerItem _item;
-    WorkerItem *item = &_item;
-    item->chunk = chunk;
-    int dp=0;
-    int dq=0;
-    Chunk *other = chunk;
-    if (dp || dq)
-    {
-        other = findChunk(chunk->p + dp, chunk->q + dq);
-    }
     chunk->compute();
     chunk->generate();
     chunk->dirty = 0;

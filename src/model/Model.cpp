@@ -237,48 +237,6 @@ int Model::chunked(float x)
     return floorf(roundf(x) / CHUNK_SIZE);
 }
 
-/*void Model::setSign(int x, int y, int z, int face, const char *text)
-{
-    int p = chunked(x);
-    int q = chunked(z);
-    _setSign(p, q, x, y, z, face, text, 1);
-    client_sign(x, y, z, face, text);
-}
-
-void Model::_setSign(int p, int q, int x, int y, int z, int face, const char *text, int dirty)
-{
-    if (strlen(text) == 0)
-    {
-        unsetSignFace(x, y, z, face);
-        return;
-    }
-    Chunk *chunk = chunks->findChunk(p, q);
-    if (chunk) {
-        SignList *signs = &chunk->signs;
-        sign_list_add(signs, x, y, z, face, text);
-        if (dirty) {
-            chunk->dirty = 1;
-        }
-    }
-}
-
-void Model::unsetSignFace(int x, int y, int z, int face)
-{
-    int p = Model::chunked(x);
-    int q = Model::chunked(z);
-    Chunk *chunk = chunks->findChunk(p, q);
-    if (chunk) {
-        SignList *signs = &chunk->signs;
-        if (sign_list_remove(signs, x, y, z, face)) {
-            chunk->dirty = 1;
-            //db_delete_sign(x, y, z, face);
-        }
-    }
-    else {
-        //db_delete_sign(x, y, z, face);
-    }
-}*/
-
 void Model::parseCommand(const char *buffer, int forward)
 {
     char username[128] = {0};
@@ -849,7 +807,6 @@ void Model::forceChunks(Player *player)
             else if (chunks->size() < MAX_CHUNKS) {
                 chunks->push_back(new Chunk(a, b));
                 chunk = (*chunks)[chunks->size()-1];
-                //chunks->createChunk(chunk, a, b);
                 chunks->genChunkBuffer(chunk);
             }
         }
