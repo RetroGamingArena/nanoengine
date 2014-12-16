@@ -95,7 +95,6 @@ class Map
         for(int i = 0 ; i < ((this->mask + 1) / (8/ITEM_RANGE)); i++)
             this->data[i] = other->data[i];
     };
-    //static void map_free(Map *map);
     static void map_copy(Map *dst, Map *src);
     static void map_grow(Map *map);
     int set(int x, int y, int z, double dx, double dy, double dz, int w, bool enabled);

@@ -153,15 +153,8 @@ void Engine::checkWorkers()
                     delete[] chunk->map.getDatas();
                     delete[] chunk->lights.getDatas();
                     
-                    //Map::map_free(&chunk->map);
-                    //Map::map_free(&chunk->lights);
-                    Map::map_copy(&chunk->map, block_map);
-                    Map::map_copy(&chunk->lights, light_map);
-                    
-                    /*delete[] chunk->map.getDatas();
-                    delete[] chunk->lights.getDatas();
                     chunk->map = new Map(block_map);
-                    chunk->lights = new Map(block_map);*/
+                    chunk->lights = new Map(light_map);
                     
                     model->requestChunk(item->p, item->q);
                 }
@@ -172,12 +165,10 @@ void Engine::checkWorkers()
             Map *light_map = item->light_map;
             if (block_map) {
                 delete[] block_map->getDatas();
-                //Map::map_free(block_map);
                 free(block_map);
             }
             if (light_map) {
                 delete[] light_map->getDatas();
-            //Map::map_free(light_map);
                 free(light_map);
             }
             worker->state = WORKER_IDLE;
