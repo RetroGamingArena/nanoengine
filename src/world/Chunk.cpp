@@ -60,7 +60,7 @@ void Chunk::compute()
     int has_light = 0;
     if (SHOW_LIGHTS)
     {
-        Map *map = &lights;
+        Map *map = lights;
         if (map && map->size)
         {
             has_light = 1;
@@ -71,15 +71,15 @@ void Chunk::compute()
     //Map *map = block_map;
     if (&map)
     {
-        MAP_FOR_EACH((&map), ex, ey, ez, ew) {
+        MAP_FOR_EACH((map), ex, ey, ez, ew) {
             
             int rawx = Map::getX(i);
             int rawy = Map::getY(i);
             int rawz = Map::getZ(i);
             
-            int x2 = rawx + (&map)->dx - ox;
-            int y2 = rawy + (&map)->dy - oy;
-            int z2 = rawz + (&map)->dz - oz;
+            int x2 = rawx + map->dx - ox;
+            int y2 = rawy + map->dy - oy;
+            int z2 = rawz + map->dz - oz;
             
             int x = 0;
             int y = 0;
@@ -111,7 +111,7 @@ void Chunk::compute()
     // flood fill light intensities
     if (has_light)
     {
-        Map *map = &lights;
+        Map *map = lights;
         if (map)
         {
             MAP_FOR_EACH(map, ex, ey, ez, ew)
@@ -146,7 +146,7 @@ void Chunk::compute()
     int miny = 256;
     int maxy = 0;
     int faces = 0;
-    MAP_FOR_EACH((&map), ex, ey, ez, ew) {
+    MAP_FOR_EACH((map), ex, ey, ez, ew) {
         if (ew <= 0) {
             continue;
         }
@@ -155,9 +155,9 @@ void Chunk::compute()
         int rawy = Map::getY(i);
         int rawz = Map::getZ(i);
         
-        int x2 = rawx + (&map)->dx - ox;
-        int y2 = rawy + (&map)->dy - oy;
-        int z2 = rawz + (&map)->dz - oz;
+        int x2 = rawx + map->dx - ox;
+        int y2 = rawy + map->dy - oy;
+        int z2 = rawz + map->dz - oz;
         
         int x = 0;
         int y = 0;
@@ -167,7 +167,7 @@ void Chunk::compute()
         y = y2;
         z = z2;
         
-        int ey = y + (&map)->dy;
+        int ey = y + map->dy;
         
         int f1 = !opaque[XYZ(x - 1, y, z)];
         int f2 = !opaque[XYZ(x + 1, y, z)];
@@ -190,7 +190,7 @@ void Chunk::compute()
     // generate geometry
     GLfloat *data = malloc_faces(10, faces);
     int offset = 0;
-    MAP_FOR_EACH_2((&map), ex, ey, ez, esx, esy, esz, ew) {
+    MAP_FOR_EACH_2(map, ex, ey, ez, esx, esy, esz, ew) {
         if (ew <= 0) {
             continue;
         }
@@ -199,9 +199,9 @@ void Chunk::compute()
         int rawy = Map::getY(i);
         int rawz = Map::getZ(i);
         
-        int x2 = rawx + (&map)->dx - ox;
-        int y2 = rawy + (&map)->dy - oy;
-        int z2 = rawz + (&map)->dz - oz;
+        int x2 = rawx + map->dx - ox;
+        int y2 = rawy + map->dy - oy;
+        int z2 = rawz + map->dz - oz;
         
         int x = 0;
         int y = 0;
@@ -211,9 +211,9 @@ void Chunk::compute()
         y = y2;
         z = z2;
         
-        int ex = x + (&map)->dx;
-        int ey = y + (&map)->dy;
-        int ez = z + (&map)->dz;
+        int ex = x + map->dx;
+        int ey = y + map->dy;
+        int ez = z + map->dz;
         
         int f1 = !opaque[XYZ(x - 1, y, z)];
         int f2 = !opaque[XYZ(x + 1, y, z)];

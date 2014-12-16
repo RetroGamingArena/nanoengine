@@ -38,13 +38,12 @@ class Map
     
         static int getIndex(int x, int y, int z)
         {
-            return (x/*+1*/)+(z/*+1*/)*34+y*34*34;
+            return x+z*34+y*34*34;
         };
         static int getX(int index);
         static int getY(int index);
         static int getZ(int index);
         int _hitTest(float max_distance, int previous, float x, float y, float z, float vx, float vy, float vz, int *hx, int *hy, int *hz);
-        //int hitTestFace(Player *player, int *x, int *y, int *z, int *face);
     
         nano_row* getDatas(){return data;};
         nano getData(int i)
@@ -95,10 +94,8 @@ class Map
         for(int i = 0 ; i < ((this->mask + 1) / (8/ITEM_RANGE)); i++)
             this->data[i] = other->data[i];
     };
-    static void map_copy(Map *dst, Map *src);
     int set(int x, int y, int z, double dx, double dy, double dz, int w, bool enabled);
-    static int map_get(Map *map, int x, int y, int z);
-    static void mapSetFunc(int x, int y, int z, double dx, double dy, double dz, int w, void *arg);
+    int get(int x, int y, int z);
 };
 
 

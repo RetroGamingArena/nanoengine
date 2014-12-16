@@ -46,7 +46,7 @@
 #define CRAFT_KEY_SIGN '`'
 
 // advanced parameters
-#define CREATE_CHUNK_RADIUS 10
+#define CREATE_CHUNK_RADIUS 3//0
 #define RENDER_CHUNK_RADIUS 10
 #define DELETE_CHUNK_RADIUS 14
 #define CHUNK_RES 1

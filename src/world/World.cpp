@@ -15,10 +15,12 @@ World::World(int p, int q)
     this->q = q;
     
     push_back(new Chunk(p, q));
-    Chunk* chunk = (*this)[this->size()-1];
-    createChunk(chunk, p, q);
-    genChunkBuffer(chunk);
     
+    Chunk* chunk = (*this)[this->size()-1];
+    
+    //createChunk(chunk, p, q);
+    
+    genChunkBuffer(chunk);
 }
 
 Chunk* World::getChunk(int p, int q)
@@ -26,34 +28,19 @@ Chunk* World::getChunk(int p, int q)
     return 0;
 }
 
-void World::createChunk(Chunk *chunk, int p, int q)
+/*void World::createChunk(Chunk *chunk, int p, int q)
 {
     initChunk(chunk, p, q);
     
-    WorkerItem *item = new WorkerItem();
-    item->chunk = chunk;
-    //item->p = chunk->p;
-    //item->q = chunk->q;
-    /*item->block_map = &chunk->map;
-    item->light_map = &chunk->lights;*/
-    chunk->map.createWorld(chunk->p,chunk->q);
+    chunk->map->createWorld(chunk->p,chunk->q);
 }
 
 void World::initChunk(Chunk *chunk, int p, int q)
 {
-    chunk->p = p;
-    chunk->q = q;
-    chunk->faces = 0;
-    chunk->sign_faces = 0;
-    chunk->buffer = 0;
-    chunk->sign_buffer = 0;
+
+    
     dirtyChunk(chunk);
-    int dx = p * CHUNK_SIZE - 1;
-    int dy = 0;
-    int dz = q * CHUNK_SIZE - 1;
-    chunk->map = Map(dx, dy, dz, 34*34*32);
-    chunk->lights = Map(dx, dy, dz, 0xf);
-}
+}*/
 
 void World::dirtyChunk(Chunk *chunk)
 {
@@ -102,7 +89,7 @@ int World::hasLights(Chunk *chunk)
                 other = findChunk(chunk->p + dp, chunk->q + dq);
             if (!other)
                 continue;
-            Map *map = &other->lights;
+            Map *map = other->lights;
             if (map->size)
                 return 1;
         }

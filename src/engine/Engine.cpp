@@ -170,6 +170,10 @@ void Engine::checkWorkers()
                 delete[] light_map->getDatas();
                 free(light_map);
             }*/
+            
+            //delete[] chunk->map.getDatas();
+            //chunk->map;
+            
             worker->state = WORKER_IDLE;
         }
         mtx_unlock(&worker->mtx);

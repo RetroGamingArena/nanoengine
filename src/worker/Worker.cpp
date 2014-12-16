@@ -30,10 +30,9 @@ int Worker::worker_run(void *arg)
         WorkerItem *item = &worker->item;
         if (item->chunk->load/*item->load*/)
         {
-            item->chunk->map.createWorld(item->chunk->p, item->chunk->q);
+            item->chunk->map->createWorld(item->chunk->p, item->chunk->q);
         }
         model->chunks->at(0)->compute();
-        //item->computeChunk(model->chunks);
         mtx_lock(&worker->mtx);
         worker->state = WORKER_DONE;
         mtx_unlock(&worker->mtx);
@@ -93,7 +92,7 @@ void Worker::ensureChunks(Player *player, Model* model)
         if (model->chunks->size() < MAX_CHUNKS) {
             model->chunks->push_back(new Chunk(a, b));
             chunk = (*model->chunks)[model->chunks->size()-1];
-            model->chunks->initChunk(chunk, a, b);
+            //model->chunks->initChunk(chunk, a, b);
         }
         else {
             return;

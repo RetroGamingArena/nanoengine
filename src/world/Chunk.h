@@ -16,8 +16,8 @@
 class Chunk
 {
     public:
-    Map map;
-    Map lights;
+    Map* map;
+    Map* lights;
     int p;
     int q;
     int faces;
@@ -30,10 +30,27 @@ class Chunk
     GLuint sign_buffer;
     GLfloat *data;
     
-    Chunk(int p, int q){this->p = p; this->q = q;};
+    Chunk(int p, int q)
+    {
+        this->p = p;
+        this->q = q;
+        this->faces = 0;
+        this->sign_faces = 0;
+        this->buffer = 0;
+        this->sign_buffer = 0;
+        
+        int dx = p * CHUNK_SIZE - 1;
+        int dy = 0;
+        int dz = q * CHUNK_SIZE - 1;
+        
+        this->map = new Map(dx, dy, dz, 34*34*32);
+        this->lights = new Map(dx, dy, dz, 0xf);
+        
+        this->map->createWorld(this->p,this->q);
+    };
     int distance(int p, int q);
     static int chunked(float x);
-    void generate(/*int minx, int miny, int faces*/);
+    void generate();
     void compute();
 };
 

@@ -18,7 +18,7 @@ void WireframeView::render(Model *model, Player *player)
     float matrix[16];
     set_matrix_3d(matrix, model->width, model->height, s->x, s->y, s->z, s->rx, s->ry, model->fov, model->ortho, model->render_radius);
     int hx, hy, hz;
-    int hw = model->hitTest(0, s->x+0.5, s->y, s->z+0.5, s->rx, s->ry, &hx, &hy, &hz);
+    int hw = 0;//model->hitTest(0, s->x+0.5, s->y, s->z+0.5, s->rx, s->ry, &hx, &hy, &hz);
 
     if (is_obstacle(hw))
     {

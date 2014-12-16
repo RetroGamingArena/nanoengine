@@ -23,8 +23,8 @@ class World : public vector<Chunk*>
         int p;
         int q;
         Chunk* getChunk(int p, int q);
-        void createChunk(Chunk *chunk, int p, int q);
-        void initChunk(Chunk *chunk, int p, int q);
+        //void createChunk(Chunk *chunk, int p, int q);
+        //void initChunk(Chunk *chunk, int p, int q);
         void dirtyChunk(Chunk *chunk);
         void genChunkBuffer(Chunk *chunk);
         Chunk *findChunk(int p, int q);

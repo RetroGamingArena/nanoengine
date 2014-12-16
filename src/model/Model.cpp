@@ -39,25 +39,18 @@ int Model::highestBlock(float x, float z)
     int q = Chunk::chunked(z);
     Chunk *chunk = chunks->findChunk(p, q);
     if (chunk) {
-        Map *map = &chunk->map;
+        Map *map = chunk->map;
         MAP_FOR_EACH(map, ex, ey, ez, ew) {
             
             int ex2  = Map::getX(i)+p*(CHUNK_SIZE+1)-1;
             int ey2  = Map::getY(i);
             int ez2  = Map::getZ(i)-q*(CHUNK_SIZE+1)-1;
-            
-            /*int ex2  = ex+p*(CHUNK_SIZE+1)-1;
-            int ey2  = ey;
-            int ez2  = ez-q*(CHUNK_SIZE+1)-1;*/
 
             if (is_obstacle(ew) && ex2 == nx && ez2 == nz)
             {
                 result = MAX(result, ey2);
             }
-            
-            /*if (is_obstacle(ew) && ex == nx && ez == nz) {
-                result = MAX(result, ey);
-            }*/
+
         } END_MAP_FOR_EACH;
     }
     return result;
@@ -226,7 +219,7 @@ int Model::hitTest(int previous, float x, float y, float z, float rx, float ry, 
             continue;
         }
         int hx, hy, hz;
-        int hw = (&chunk->map)->_hitTest(8, previous, x, y, z, vx, vy, vz, &hx, &hy, &hz);
+        int hw = chunk->map->_hitTest(8, previous, x, y, z, vx, vy, vz, &hx, &hy, &hz);
         if (hw > 0) {
             float d = sqrtf(powf(hx - x, 2) + powf(hy - y, 2) + powf(hz - z, 2));
             if (best == 0 || d < best) {
@@ -353,10 +346,9 @@ void Model::toggleLight(int x, int y, int z)
     int q = chunked(z);
     Chunk *chunk = chunks->findChunk(p, q);
     if (chunk) {
-        Map *map = &chunk->lights;
-        int w = Map::map_get(map, x, y, z) ? 0 : 15;
+        Map *map = chunk->lights;
+        int w = map->get(x, y, z) ? 0 : 15;
         map->set(x, y, z, 0, 0, 0, w, true);
-        //db_insert_light(p, q, x, y, z, w);
         client_light(x, y, z, w);
         chunks->dirtyChunk(chunk);
     }
@@ -388,7 +380,7 @@ void Model::_setBlock(int p, int q, int x, int y, int z, int w, int dirty)
 {
     Chunk *chunk = chunks->findChunk(p, q);
     if (chunk) {
-        Map *map = &chunk->map;
+        Map *map = chunk->map;
         if (map->set(x, y, z, 0, 0, 0, w, 1)) {
             if (dirty) {
                 chunks->dirtyChunk(chunk);
@@ -420,8 +412,8 @@ int Model::getBlock(int x, int y, int z)
     int q = chunked(z);
     Chunk *chunk = chunks->findChunk(p, q);
     if (chunk) {
-        Map *map = &chunk->map;
-        return Map::map_get(map, x, y, z);
+        Map *map = chunk->map;
+        return map->get(x, y, z);
     }
     return 0;
 }
@@ -672,7 +664,7 @@ void Model::setLight(int p, int q, int x, int y, int z, int w)
 {
     Chunk *chunk = chunks->findChunk(p, q);
     if (chunk) {
-        Map *map = &chunk->lights;
+        Map *map = chunk->lights;
         if (map->set(x, y, z, 0, 0, 0, w, true)) {
             chunks->dirtyChunk(chunk);
             //db_insert_light(p, q, x, y, z, w);
@@ -694,9 +686,9 @@ int Model::collide(int height, State *s)
         return result;
     }
 
-    Map *map = &chunk->map;
+    Map *map = chunk->map;
     
-    if (!is_obstacle(Map::map_get(map, s->x-1, s->y-height, s->z-1)))
+    if (!is_obstacle(map->get(s->x-1, s->y-height, s->z-1)))
     {
         s->y += -0.015625;
     }
@@ -706,7 +698,7 @@ int Model::collide(int height, State *s)
         s->dz = 0;
         result = true;
     }
-    if (!is_obstacle(Map::map_get(map, s->x + s->dx-1, s->y-1, s->z + s->dz-1)))
+    if (!is_obstacle(map->get(s->x + s->dx-1, s->y-1, s->z + s->dz-1)))
     {
         s->x = s->x + s->dx;
         s->z = s->z + s->dz;
@@ -729,7 +721,7 @@ int Model::collide(int height, float *x, float *y, float *z)
     if (!chunk) {
         return result;
     }
-    Map *map = &chunk->map;
+    Map *map = chunk->map;
     int nx = roundf(*x); // - (chunk->p*CHUNK_SIZE);
     int ny = roundf(*y);
     int nz = roundf(*z);
@@ -753,7 +745,7 @@ int Model::collide(int height, float *x, float *y, float *z)
     float pad = 0.25;
     for (int dy = 0; dy < height; dy++)
     {
-        if (px < -pad && is_obstacle(Map::map_get(map, nx, ny - dy, nz)))
+        if (px < -pad && is_obstacle(map->get(nx, ny - dy, nz)))
         {  //nx - 1, ny - dy, nz))) {
             *x = roundf(*x);//nx - pad;
         }
@@ -763,18 +755,18 @@ int Model::collide(int height, float *x, float *y, float *z)
         if (px > pad && is_obstacle(Map::map_get(map, nx+1, ny - dy, nz))) {
             *x = nx + pad;
         }*/
-        if (py < -pad && is_obstacle(Map::map_get(map, nx, ny - dy - 1, nz))) {
+        if (py < -pad && is_obstacle(map->get(nx, ny - dy - 1, nz))) {
             *y = ny - pad;
             result = 1;
         }
-        if (py > pad && is_obstacle(Map::map_get(map, nx, ny - dy + 1, nz))) {
+        if (py > pad && is_obstacle(map->get(nx, ny - dy + 1, nz))) {
             *y = ny + pad;
             result = 1;
         }
-        if (pz < -pad && is_obstacle(Map::map_get(map, nx, ny - dy, nz - 1))) {
+        if (pz < -pad && is_obstacle(map->get(nx, ny - dy, nz - 1))) {
             *z = /*roundf(*z)+pad*2;*/nz - pad;
         }
-        if (pz > pad && is_obstacle(Map::map_get(map, nx, ny - dy, nz + 1))) {
+        if (pz > pad && is_obstacle(map->get(nx, ny - dy, nz + 1))) {
             *z = /*roundf(*z);*/nz + pad;
         }
     }
@@ -802,8 +794,8 @@ void Model::deleteChunks()
         }
         if (_delete) {
             
-            delete[] chunk->map.getDatas();
-            delete[] chunk->lights.getDatas();
+            delete[] chunk->map->getDatas();
+            delete[] chunk->lights->getDatas();
             //Map::map_free(&chunk->map);
             //Map::map_free(&chunk->lights);
             
@@ -823,8 +815,8 @@ void Model::deleteAllChunks()
     {
         Chunk *chunk = (*chunks)[i];
         
-        delete[] chunk->map.getDatas();
-        delete[] chunk->lights.getDatas();
+        delete[] chunk->map->getDatas();
+        delete[] chunk->lights->getDatas();
         //Map::map_free(&chunk->map);
         //Map::map_free(&chunk->lights);
         
@@ -857,7 +849,7 @@ void Model::forceChunks(Player *player)
             else if (chunks->size() < MAX_CHUNKS) {
                 chunks->push_back(new Chunk(a, b));
                 chunk = (*chunks)[chunks->size()-1];
-                chunks->createChunk(chunk, a, b);
+                //chunks->createChunk(chunk, a, b);
                 chunks->genChunkBuffer(chunk);
             }
         }

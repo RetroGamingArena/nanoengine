@@ -17,16 +17,6 @@ Map::Map(int dx, int dy, int dz, int mask)
         this->data[i] = 0;
 }
 
-void Map::map_copy(Map *dst, Map *src) {
-    dst->dx = src->dx;
-    dst->dy = src->dy;
-    dst->dz = src->dz;
-    dst->mask = src->mask;
-    dst->size = src->size;
-    dst->data = (nano_row *)calloc(dst->mask + 1 / (8/ITEM_RANGE), sizeof(nano_row));
-    memcpy(dst->data, src->data, (dst->mask + 1) / (8/ITEM_RANGE) * sizeof(nano_row));
-}
-
 int Map::_hitTest(float max_distance, int previous, float x, float y, float z, float vx, float vy, float vz, int *hx, int *hy, int *hz)
 {
     int m = 32;
@@ -38,7 +28,7 @@ int Map::_hitTest(float max_distance, int previous, float x, float y, float z, f
         int ny = roundf(y);
         int nz = roundf(z);
         if (nx != px || ny != py || nz != pz) {
-            int hw = map_get(this, nx, ny, nz);
+            int hw = this->get(nx, ny, nz);
             if (hw > 0) {
                 if (previous) {
                     *hx = px; *hy = py; *hz = pz;
@@ -65,7 +55,6 @@ int Map::set(int x, int y, int z, double dx, double dy, double dz, int w, bool e
     
     if (w > 0)
     {
-
         setData(index,w);
         this->size++;
         return 1;
@@ -73,18 +62,15 @@ int Map::set(int x, int y, int z, double dx, double dy, double dz, int w, bool e
     return 0;
 }
 
-int Map::map_get(Map *map, int x, int y, int z) {
-    x -= map->dx;//-1;
-    y -= map->dy;
-    z -= map->dz;//-1;
-    
-    if (x < 0 || x > 255) return 0;
-    if (y < 0 || y > 255) return 0;
-    if (z < 0 || z > 255) return 0;
+int Map::get(int x, int y, int z)
+{
+    x -= this->dx;
+    y -= this->dy;
+    z -= this->dz;
     
     unsigned int index = getIndex(x,y%32,z);
-    
-    unsigned char entry = map->getData(index);
+    nano entry = this->getData(index);
+
     return entry;
 }
 
