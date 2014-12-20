@@ -46,6 +46,7 @@ void World::genChunkBuffer(Chunk *chunk)
 {
     chunk->compute();
     chunk->generate();
+    chunk->empty();
     chunk->dirty = 0;
 }
 

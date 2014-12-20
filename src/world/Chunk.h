@@ -52,6 +52,7 @@ class Chunk
     static int chunked(float x);
     void generate();
     void compute();
+    void empty();
 };
 
 #endif /* defined(__Nanocraft__Chunk__) */

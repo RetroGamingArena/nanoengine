@@ -28,11 +28,10 @@ int Worker::worker_run(void *arg)
         }
         mtx_unlock(&worker->mtx);
         WorkerItem *item = &worker->item;
-        if (item->chunk->load/*item->load*/)
+        if (item->chunk->load)
         {
             item->chunk->map->createWorld(item->chunk->p, item->chunk->q);
         }
-        model->chunks->at(0)->compute();
         mtx_lock(&worker->mtx);
         worker->state = WORKER_DONE;
         mtx_unlock(&worker->mtx);

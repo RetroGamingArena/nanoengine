@@ -159,6 +159,7 @@ void Engine::checkWorkers()
                 
                 chunk->compute();
                 chunk->generate();
+                chunk->empty();
             }
             /*Map *block_map = item->block_map;
             Map *light_map = item->light_map;

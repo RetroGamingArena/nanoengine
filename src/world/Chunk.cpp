@@ -40,6 +40,12 @@ int Chunk::chunked(float x)
         return (base + 1)*-1;
 }
 
+void Chunk::empty()
+{
+    delete[] map->getDatas();
+    delete map;
+}
+
 void Chunk::generate()
 {
     del_buffer(buffer);
