@@ -24,7 +24,7 @@
 
 Engine* Engine::instance = NULL;
 
-int Engine::WORKERS = 1;
+int Engine::WORKERS = 2;
 
 bool Engine::init()
 {
@@ -150,7 +150,7 @@ void Engine::checkWorkers()
         mtx_lock(&worker->mtx);
         if (worker->state == WORKER_DONE)
         {
-            Chunk *chunk = worker->workingChunk; //item->chunk;
+            Chunk *chunk = worker->workingChunk;
             if (chunk)
             {
                 chunk->compute();

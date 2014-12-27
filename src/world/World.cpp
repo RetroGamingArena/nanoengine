@@ -86,7 +86,8 @@ Chunk *World::findChunk(int p, int q)
 Chunk *World::requestChunk(int &best_score, int &best_a, int &best_b)
 {
     float planes[6][4];
-    
+    Chunk *chunk;
+
     Model* model = Engine::getInstance()->getModel();
     int r = model->create_radius;
     for (int dp = -r; dp <= r; dp++)
@@ -95,11 +96,11 @@ Chunk *World::requestChunk(int &best_score, int &best_a, int &best_b)
         {
             int a = p + dp;
             int b = q + dq;
-            Chunk *chunk = model->chunks->findChunk(a, b);
-            if (chunk && !chunk->dirty)
-            {
+            chunk = model->chunks->findChunk(a, b);
+            if ( (chunk && !chunk->dirty) )
                 continue;
-            }
+            if( (chunk && chunk->busy) )
+                continue;
             int distance = MAX(ABS(dp), ABS(dq));
             int invisible = !model->chunkVisible(planes, a, b, 0, 256);
             int priority = 0;
@@ -116,5 +117,7 @@ Chunk *World::requestChunk(int &best_score, int &best_a, int &best_b)
             }
         }
     }
+    if(chunk)
+        chunk->busy = 1;
     return 0;
 }

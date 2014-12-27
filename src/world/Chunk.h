@@ -48,6 +48,7 @@ class Chunk
         this->lights = new Map(dx, dy, dz, 0xf);
         
         this->map->createWorld(this->p,this->q);
+        busy = false;
     };
     int distance(int p, int q);
     static int chunked(float x);
