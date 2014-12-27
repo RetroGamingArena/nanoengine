@@ -150,8 +150,7 @@ void Engine::checkWorkers()
         mtx_lock(&worker->mtx);
         if (worker->state == WORKER_DONE)
         {
-            WorkerItem *item = &worker->item;
-            Chunk *chunk = item->chunk;
+            Chunk *chunk = worker->workingChunk; //item->chunk;
             if (chunk)
             {
                 chunk->compute();

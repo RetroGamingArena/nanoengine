@@ -40,7 +40,6 @@
 		64A7B4D61A366F1E006E7A5B /* View.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64A7B4A01A366F1E006E7A5B /* View.cpp */; };
 		64A7B4D71A366F1E006E7A5B /* WireframeView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64A7B4A21A366F1E006E7A5B /* WireframeView.cpp */; };
 		64A7B4D81A366F1E006E7A5B /* Worker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64A7B4A51A366F1E006E7A5B /* Worker.cpp */; };
-		64A7B4D91A366F1E006E7A5B /* WorkerItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64A7B4A71A366F1E006E7A5B /* WorkerItem.cpp */; };
 		64A7B4DA1A366F1E006E7A5B /* Block.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64A7B4AA1A366F1E006E7A5B /* Block.cpp */; };
 		64A7B4DB1A366F1E006E7A5B /* Chunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64A7B4AC1A366F1E006E7A5B /* Chunk.cpp */; };
 		64A7B4DD1A366F1E006E7A5B /* World.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64A7B4B01A366F1E006E7A5B /* World.cpp */; };
@@ -172,8 +171,6 @@
 		64A7B4A31A366F1E006E7A5B /* WireframeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WireframeView.h; sourceTree = "<group>"; };
 		64A7B4A51A366F1E006E7A5B /* Worker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Worker.cpp; sourceTree = "<group>"; };
 		64A7B4A61A366F1E006E7A5B /* Worker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Worker.h; sourceTree = "<group>"; };
-		64A7B4A71A366F1E006E7A5B /* WorkerItem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WorkerItem.cpp; sourceTree = "<group>"; };
-		64A7B4A81A366F1E006E7A5B /* WorkerItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkerItem.h; sourceTree = "<group>"; };
 		64A7B4AA1A366F1E006E7A5B /* Block.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Block.cpp; sourceTree = "<group>"; };
 		64A7B4AB1A366F1E006E7A5B /* Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block.h; sourceTree = "<group>"; };
 		64A7B4AC1A366F1E006E7A5B /* Chunk.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Chunk.cpp; sourceTree = "<group>"; };
@@ -401,8 +398,6 @@
 			children = (
 				64A7B4A51A366F1E006E7A5B /* Worker.cpp */,
 				64A7B4A61A366F1E006E7A5B /* Worker.h */,
-				64A7B4A71A366F1E006E7A5B /* WorkerItem.cpp */,
-				64A7B4A81A366F1E006E7A5B /* WorkerItem.h */,
 			);
 			path = worker;
 			sourceTree = "<group>";
@@ -515,7 +510,6 @@
 				64A7B4CC1A366F1E006E7A5B /* BufferUtils.cpp in Sources */,
 				64A7B4C61A366F1E006E7A5B /* State.cpp in Sources */,
 				64A7B4C41A366F1E006E7A5B /* Model.cpp in Sources */,
-				64A7B4D91A366F1E006E7A5B /* WorkerItem.cpp in Sources */,
 				64A7B4DD1A366F1E006E7A5B /* World.cpp in Sources */,
 				64A7B4C01A366F1E006E7A5B /* item.cpp in Sources */,
 				64A7B4D81A366F1E006E7A5B /* Worker.cpp in Sources */,

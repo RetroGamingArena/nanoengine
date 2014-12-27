@@ -66,8 +66,8 @@ void Worker::ensureChunks(Player *player, Model* model)
             return;
         }
     }
-    item.chunk = chunk;
-    item.chunk->load = load;
+    this->workingChunk = chunk;
+    this->workingChunk->load = load;
     chunk->dirty = 0;
     state = WORKER_BUSY;
     cnd_signal(&cnd);

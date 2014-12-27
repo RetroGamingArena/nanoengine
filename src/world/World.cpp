@@ -7,7 +7,6 @@
 //
 
 #include "World.h"
-#include "WorkerItem.h"
 #include "Engine.h"
 #include "MathUtils.h"
 

@@ -10,8 +10,8 @@
 #define __Nanocraft__Worker__
 
 #include "tinycthread.h"
-#include "WorkerItem.h"
 #include "Model.h"
+#include "Chunk.h"
 
 #define WORKER_IDLE 0
 #define WORKER_BUSY 1
@@ -20,12 +20,12 @@
 class Worker
 {
     public:
+        Chunk* workingChunk;
         int index;
         int state;
         thrd_t thrd;
         mtx_t mtx;
         cnd_t cnd;
-        WorkerItem item;
         static int worker_run(void *arg);
         void ensureChunks(Player *player, Model* model);
 };
