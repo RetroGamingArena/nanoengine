@@ -7,6 +7,10 @@
 //
 
 #include <stdlib.h>
+
+#include <ctime>
+#include <iostream>
+
 #include <cmath>
 #include <curl/curl.h>
 #include "Engine.h"
@@ -20,7 +24,7 @@
 
 Engine* Engine::instance = NULL;
 
-int Engine::WORKERS = 2;
+int Engine::WORKERS = 1;
 
 bool Engine::init()
 {
@@ -150,23 +154,10 @@ void Engine::checkWorkers()
             Chunk *chunk = item->chunk;
             if (chunk)
             {
-                if (chunk->load/*item->load*/)
-                {
-                    /*Map *block_map = item->block_map;
-                    Map *light_map = item->light_map;
-                    
-                    delete[] chunk->map.getDatas();
-                    delete[] chunk->lights.getDatas();
-                    
-                    chunk->map = new Map(block_map);
-                    chunk->lights = new Map(light_map);*/
-                }
-                
                 chunk->compute();
                 chunk->generate();
                 chunk->empty();
             }
-            
             worker->state = WORKER_IDLE;
         }
         mtx_unlock(&worker->mtx);
@@ -199,6 +190,8 @@ void Engine::stop()
     glfwTerminate();
     curl_global_cleanup();
 }
+
+using namespace std;
 
 int Engine::run()
 {
@@ -258,6 +251,8 @@ int Engine::run()
         render(player);
         
         //render_sky(&engine->sky_attrib, player, sky_buffer);
+        
+        
         getViews()[0]->render(g, me);
         glClear(GL_DEPTH_BUFFER_BIT);
         
@@ -265,7 +260,6 @@ int Engine::run()
         
         // RENDER HUD //
         getViews()[1]->render(g, me);
-        
         getViews()[3]->render(g, me);
         
         // SWAP AND POLL //

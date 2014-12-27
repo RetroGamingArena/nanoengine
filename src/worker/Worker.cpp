@@ -8,6 +8,9 @@
 
 #include <cstdlib>
 
+#include <ctime>
+#include <iostream>
+
 #include "Worker.h"
 #include "engine.h"
 #include "matrix.h"
@@ -15,6 +18,8 @@
 
 int Worker::worker_run(void *arg)
 {
+    clock_t begin = clock();
+    
     Worker *worker = (Worker *)arg;
     int running = 1;
     while (running)
@@ -23,18 +28,19 @@ int Worker::worker_run(void *arg)
         while (worker->state != WORKER_BUSY)
             cnd_wait(&worker->cnd, &worker->mtx);
         mtx_unlock(&worker->mtx);
-        WorkerItem *item = &worker->item;
-        if (item->chunk->load)
-            item->chunk->map->createWorld(item->chunk->p, item->chunk->q);
-        mtx_lock(&worker->mtx);
         worker->state = WORKER_DONE;
         mtx_unlock(&worker->mtx);
     }
+    clock_t end = clock();
+    cout << "rhread " << (end - begin) / (CLOCKS_PER_SEC/1000) << endl;
+    
     return 0;
 }
 
 void Worker::ensureChunks(Player *player, Model* model)
 {
+    clock_t begin = clock();
+    
     int start = 0x0fffffff;
     int best_score = start;
     int best_a = 0;
@@ -65,4 +71,7 @@ void Worker::ensureChunks(Player *player, Model* model)
     chunk->dirty = 0;
     state = WORKER_BUSY;
     cnd_signal(&cnd);
+    
+    clock_t end = clock();
+    cout << "worker " << (end - begin) / (CLOCKS_PER_SEC/1000) << endl;
 }

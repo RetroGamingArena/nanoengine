@@ -66,12 +66,6 @@ class Map
             int rowIndex = i / itemsPerRow;
             int colIndex = i % itemsPerRow;
             
-            if(colIndex>0)
-            {
-                int a = 0;
-                a++;
-            }
-            
             nano current = *(this->data+rowIndex);
             
             char left = (current >> (itemsPerRow-colIndex)*itemSize) << (itemsPerRow-colIndex)*itemSize;

@@ -42,9 +42,7 @@ int Chunk::chunked(float x)
 
 void Chunk::empty()
 {
-    //delete[] map->getDatas();
     delete map;
-    //delete[] lights->getDatas();
     delete lights;
 }
 
