@@ -42,8 +42,10 @@ int Chunk::chunked(float x)
 
 void Chunk::empty()
 {
-    delete[] map->getDatas();
+    //delete[] map->getDatas();
     delete map;
+    //delete[] lights->getDatas();
+    delete lights;
 }
 
 void Chunk::generate()
@@ -74,7 +76,6 @@ void Chunk::compute()
     }
     
     // populate opaque array
-    //Map *map = block_map;
     if (&map)
     {
         MAP_FOR_EACH((map), ex, ey, ez, ew) {

@@ -181,7 +181,9 @@ int Attrib::renderChunks(Model *model, Player *player)
     
     int result = 0;
     State *s = &player->state;
+    
     Engine::getInstance()->ensureChunks(player);
+    
     int p = Chunk::chunked(s->x);
     int q = Chunk::chunked(s->z);
     float light = window->getDayLight();
@@ -202,13 +204,9 @@ int Attrib::renderChunks(Model *model, Player *player)
     {
         Chunk *chunk = (*model->chunks)[i];
         if (chunk->distance(p, q) > model->render_radius)
-        {
             continue;
-        }
         if (!model->chunkVisible(planes, chunk->p, chunk->q, chunk->miny, chunk->maxy))
-        {
             continue;
-        }
         drawChunk(chunk);
         result += chunk->faces;
     }

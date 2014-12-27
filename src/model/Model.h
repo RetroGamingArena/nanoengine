@@ -92,7 +92,7 @@ public:
     void setBlock(int x, int y, int z, int w);
     void _setSign(int p, int q, int x, int y, int z, int face, const char *text, int dirty);
     void parseCommand(const char *buffer, int forward);
-    void checkWorkers();
+    //void checkWorkers();
     void forceChunks(Player *player);
     void initWorld(Player *player);
     void onLight();

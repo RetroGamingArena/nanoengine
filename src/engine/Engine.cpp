@@ -20,7 +20,7 @@
 
 Engine* Engine::instance = NULL;
 
-int Engine::WORKERS = 4;
+int Engine::WORKERS = 2;
 
 bool Engine::init()
 {
@@ -65,6 +65,8 @@ Engine::Engine()
     abstractWindow = new GLFWWindow();
     model = new Model();
     g = getModel();
+    
+    
 }
 
 Engine* Engine::getInstance()
@@ -142,11 +144,14 @@ void Engine::checkWorkers()
     {
         Worker *worker = workers[i];
         mtx_lock(&worker->mtx);
-        if (worker->state == WORKER_DONE) {
+        if (worker->state == WORKER_DONE)
+        {
             WorkerItem *item = &worker->item;
-            Chunk *chunk = item->chunk;//model->chunks->findChunk(item->p, item->q);
-            if (chunk) {
-                if (chunk->load/*item->load*/) {
+            Chunk *chunk = item->chunk;
+            if (chunk)
+            {
+                if (chunk->load/*item->load*/)
+                {
                     /*Map *block_map = item->block_map;
                     Map *light_map = item->light_map;
                     
@@ -161,19 +166,6 @@ void Engine::checkWorkers()
                 chunk->generate();
                 chunk->empty();
             }
-            /*Map *block_map = item->block_map;
-            Map *light_map = item->light_map;
-            if (block_map) {
-                delete[] block_map->getDatas();
-                free(block_map);
-            }
-            if (light_map) {
-                delete[] light_map->getDatas();
-                free(light_map);
-            }*/
-            
-            //delete[] chunk->map.getDatas();
-            //chunk->map;
             
             worker->state = WORKER_IDLE;
         }
@@ -184,12 +176,13 @@ void Engine::checkWorkers()
 void Engine::ensureChunks(Player *player)
 {
     checkWorkers();
-    for (int i = 0; i < workers.size(); i++) {
+    
+    for (int i = 0; i < workers.size(); i++)
+    {
         Worker *worker = workers[i];
         mtx_lock(&worker->mtx);
-        if (worker->state == WORKER_IDLE) {
+        if (worker->state == WORKER_IDLE)
             worker->ensureChunks(player, this->model);
-        }
         mtx_unlock(&worker->mtx);
     }
 }

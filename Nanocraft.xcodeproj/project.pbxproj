@@ -119,7 +119,6 @@
 		64A7B4651A366F1E006E7A5B /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 		64A7B4661A366F1E006E7A5B /* cube.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cube.cpp; sourceTree = "<group>"; };
 		64A7B4671A366F1E006E7A5B /* cube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cube.h; sourceTree = "<group>"; };
-		64A7B4681A366F1E006E7A5B /* db.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = db.h; sourceTree = "<group>"; };
 		64A7B46A1A366F1E006E7A5B /* Engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Engine.cpp; sourceTree = "<group>"; };
 		64A7B46B1A366F1E006E7A5B /* Engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Engine.h; sourceTree = "<group>"; };
 		64A7B46C1A366F1E006E7A5B /* FPS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FPS.cpp; sourceTree = "<group>"; };
@@ -291,7 +290,6 @@
 				64A7B4651A366F1E006E7A5B /* config.h */,
 				64A7B4661A366F1E006E7A5B /* cube.cpp */,
 				64A7B4671A366F1E006E7A5B /* cube.h */,
-				64A7B4681A366F1E006E7A5B /* db.h */,
 				64A7B4691A366F1E006E7A5B /* engine */,
 				64A7B4701A366F1E006E7A5B /* item.cpp */,
 				64A7B4711A366F1E006E7A5B /* item.h */,

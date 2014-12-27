@@ -26,6 +26,7 @@ class World : public vector<Chunk*>
         void dirtyChunk(Chunk *chunk);
         void genChunkBuffer(Chunk *chunk);
         Chunk *findChunk(int p, int q);
+        Chunk *requestChunk(int &best_score, int &best_a, int &best_b);
         int hasLights(Chunk *chunk);
 };
 

@@ -82,6 +82,11 @@ class Map
         }
     void createWorld(int p, int q);
     Map(){};
+    ~Map()
+    {
+        delete[] data;
+        data = NULL;
+    };
     Map(int dx, int dy, int dz, int mask);
     Map(Map* other)
     {

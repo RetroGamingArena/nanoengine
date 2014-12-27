@@ -26,6 +26,7 @@ class Chunk
     int miny;
     int maxy;
     bool load;
+    bool busy;
     GLuint buffer;
     GLuint sign_buffer;
     GLfloat *data;
