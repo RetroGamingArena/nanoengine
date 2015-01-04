@@ -78,8 +78,6 @@ void Attrib::drawTriangles3dAo(GLuint buffer, int count)
                           sizeof(GLfloat) * 10, 0);
     glVertexAttribPointer(normal, 3, GL_FLOAT, GL_FALSE,
                           sizeof(GLfloat) * 10, (GLvoid *)(sizeof(GLfloat) * 3));
-    /*glVertexAttribPointer(attrib->color, 4, GL_FLOAT, GL_FALSE,
-     sizeof(GLfloat) * 14, (GLvoid *)(sizeof(GLfloat) * 6));*/
     glVertexAttribPointer(uv, 4, GL_FLOAT, GL_FALSE,
                           sizeof(GLfloat) * 10, (GLvoid *)(sizeof(GLfloat) * 6));
     

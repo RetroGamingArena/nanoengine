@@ -9,6 +9,7 @@
 #include <cmath>
 #include <string>
 #include <cstdlib>
+#include <iostream>
 
 #include "Chunk.h"
 #include "util.h"
@@ -52,11 +53,15 @@ void Chunk::generate()
     buffer = gen_faces(10, faces, data);
 }
 
+using namespace std;
+
 void Chunk::compute()
 {
-    char *opaque = (char *)calloc(XZ_SIZE * XZ_SIZE * Y_SIZE, sizeof(float));
-    char *light = (char *)calloc(XZ_SIZE * XZ_SIZE * Y_SIZE, sizeof(char));
-    char *highest = (char *)calloc(XZ_SIZE * XZ_SIZE, sizeof(char));
+    clock_t begin = clock();
+    int count = XZ_SIZE * XZ_SIZE * Y_SIZE*4;
+    char* opaque = new char[count];
+    char light[XZ_SIZE * XZ_SIZE * Y_SIZE];
+    char highest[XZ_SIZE * XZ_SIZE];
     
     int ox = p * CHUNK_SIZE - CHUNK_SIZE - 1;
     int oy = -1;
@@ -64,37 +69,27 @@ void Chunk::compute()
     
     // check for lights
     int has_light = 0;
-    if (SHOW_LIGHTS)
+    /*if (SHOW_LIGHTS)
     {
         Map *map = lights;
         if (map && map->size)
-        {
             has_light = 1;
-        }
-    }
+    }*/
+    
+    GLfloat *data = malloc_faces(10, faces);
     
     // populate opaque array
     if (&map)
     {
-        MAP_FOR_EACH((map), ex, ey, ez, ew) {
-            
+        MAP_FOR_EACH((map), ex, ey, ez, ew)
+        {
             int rawx = Map::getX(i);
             int rawy = Map::getY(i);
             int rawz = Map::getZ(i);
             
-            int x2 = rawx + map->dx - ox;
-            int y2 = rawy + map->dy - oy;
-            int z2 = rawz + map->dz - oz;
-            
-            int x = 0;
-            int y = 0;
-            int z = 0;
-            
-            {
-                x = x2;
-                y = y2;
-                z = z2;
-            }
+            int x = rawx + map->dx - ox;
+            int y = rawy + map->dy - oy;
+            int z = rawz + map->dz - oz;
             
             int w = ew;
             // TODO: this should be unnecessary
@@ -125,27 +120,15 @@ void Chunk::compute()
                 int rawy = Map::getY(i);
                 int rawz = Map::getZ(i);
                 
-                int x2 = rawx + map->dx - ox;
-                int y2 = rawy + map->dy - oy;
-                int z2 = rawz + map->dz - oz;
-                
-                int x = 0;
-                int y = 0;
-                int z = 0;
-                
-                {
-                    x = x2;
-                    y = y2;
-                    z = z2;
-                }
+                int x = rawx + map->dx - ox;
+                int y = rawy + map->dy - oy;
+                int z = rawz + map->dz - oz;
                 
                 MathUtils::lightFill(opaque, light, x, y, z, ew, 1);
             } END_MAP_FOR_EACH;
         }
         
     }
-    
-    //map = block_map;
     
     // count exposed faces
     int miny = 256;
@@ -160,17 +143,9 @@ void Chunk::compute()
         int rawy = Map::getY(i);
         int rawz = Map::getZ(i);
         
-        int x2 = rawx + map->dx - ox;
-        int y2 = rawy + map->dy - oy;
-        int z2 = rawz + map->dz - oz;
-        
-        int x = 0;
-        int y = 0;
-        int z = 0;
-        
-        x = x2;
-        y = y2;
-        z = z2;
+        int x = rawx + map->dx - ox;
+        int y = rawy + map->dy - oy;
+        int z = rawz + map->dz - oz;
         
         int ey = y + map->dy;
         
@@ -193,7 +168,7 @@ void Chunk::compute()
     } END_MAP_FOR_EACH;
     
     // generate geometry
-    GLfloat *data = malloc_faces(10, faces);
+    //GLfloat *data = malloc_faces(10, faces);
     int offset = 0;
     MAP_FOR_EACH_2(map, ex, ey, ez, esx, esy, esz, ew) {
         if (ew <= 0) {
@@ -204,17 +179,9 @@ void Chunk::compute()
         int rawy = Map::getY(i);
         int rawz = Map::getZ(i);
         
-        int x2 = rawx + map->dx - ox;
-        int y2 = rawy + map->dy - oy;
-        int z2 = rawz + map->dz - oz;
-        
-        int x = 0;
-        int y = 0;
-        int z = 0;
-        
-        x = x2;
-        y = y2;
-        z = z2;
+        int x = rawx + map->dx - ox;
+        int y = rawy + map->dy - oy;
+        int z = rawz + map->dz - oz;
         
         int ex = x + map->dx;
         int ey = y + map->dy;
@@ -227,22 +194,29 @@ void Chunk::compute()
         int f5 = !opaque[XYZ(x, y, z - 1)];
         int f6 = !opaque[XYZ(x, y, z + 1)];
         int total = f1 + f2 + f3 + f4 + f5 + f6;
-        if (total == 0) {
+        if (total == 0)
+        {
             continue;
         }
         char neighbors[27] = {0};
         char lights[27] = {0};
         float shades[27] = {0};
         int index = 0;
-        for (int dx = -1; dx <= 1; dx++) {
-            for (int dy = -1; dy <= 1; dy++) {
-                for (int dz = -1; dz <= 1; dz++) {
+        for (int dx = -1; dx <= 1; dx++)
+        {
+            for (int dy = -1; dy <= 1; dy++)
+            {
+                for (int dz = -1; dz <= 1; dz++)
+                {
                     neighbors[index] = opaque[XYZ(x + dx, y + dy, z + dz)];
                     lights[index] = light[XYZ(x + dx, y + dy, z + dz)];
                     shades[index] = 0;
-                    if (y + dy <= highest[XZ(x + dx, z + dz)]) {
-                        for (int oy = 0; oy < 8; oy++) {
-                            if (opaque[XYZ(x + dx, y + dy + oy, z + dz)]) {
+                    if (y + dy <= highest[XZ(x + dx, z + dz)])
+                    {
+                        for (int oy = 0; oy < 8; oy++)
+                        {
+                            if (opaque[XYZ(x + dx, y + dy + oy, z + dz)])
+                            {
                                 shades[index] = 1.0 - oy * 0.125;
                                 break;
                             }
@@ -281,12 +255,15 @@ void Chunk::compute()
         offset += total * 60;
     } END_MAP_FOR_EACH;
     
-    free(opaque);
-    free(light);
-    free(highest);
+    delete[] opaque;
+    //delete[] light;
+    //delete[] highest;
     
     this->miny = miny;
     this->maxy = maxy;
     this->faces = faces;
     this->data = data;
+    
+    clock_t end = clock();
+    cout << "compute: " << (end - begin) / (CLOCKS_PER_SEC/1000) << endl;
 }

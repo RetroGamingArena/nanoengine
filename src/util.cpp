@@ -43,7 +43,8 @@ GLfloat *malloc_faces(int components, int faces) {
     return (GLfloat *)malloc(sizeof(GLfloat) * 6 * components * faces);
 }
 
-GLuint gen_faces(int components, int faces, GLfloat *data) {
+GLuint gen_faces(int components, int faces, GLfloat *data)
+{
     GLuint buffer = gen_buffer(
         sizeof(GLfloat) * 6 * components * faces, data);
     free(data);
